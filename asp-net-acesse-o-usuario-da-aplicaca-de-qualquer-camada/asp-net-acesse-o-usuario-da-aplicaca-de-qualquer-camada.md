@@ -15,9 +15,9 @@ Em uma aplicação multi-tenancy é necessário validar se o usuário pertence a
 Solução para resolver estes cenários comuns sempre existiu, o difícil mesmo era escrever uma solução elegante e que preservasse a responsabilidade da camada (não devemos deixar que camadas de domínio e dados por ex dependam do contexto de usuário do ASP.NET Identity).
 
 ## Solução
-O ASP.NET possui uma biblioteca de abstrações HTTP que possui uma interface chamada *IHttpContextAccessor*. Esta interface possui uma property do nosso conhecido HttpContext e é implementada na classe HttpContextAccessor.
+O ASP.NET possui uma biblioteca de abstrações HTTP que possui uma interface chamada `[IHttpContextAccessor]`. Esta interface possui uma property do nosso conhecido `[HttpContext]` e é implementada na classe `[HttpContextAccessor]`.
 
-Isso significa que podemos injetar esta interface e obter dados do HttpContext.
+Isso significa que podemos injetar esta interface e obter dados do `[HttpContext]`.
 
 Mas calma! Não vá por ai... Vamos melhorar isso!
 
@@ -46,7 +46,7 @@ public interface IUser
 
 Na sequência crie a classe que representa o usuário logado, esta classe pode ficar numa camada de Infra (eu costumo isolar o Identity em Infra então esta classe já tem lugar apropriado).
 
-Repare que a interface *IHttpContextAccessor* está sendo injetada no construtor e será através dela que obteremos os dados necessários:
+Repare que a interface `[IHttpContextAccessor]` está sendo injetada no construtor e será através dela que obteremos os dados necessários:
 
 ```csharp
 using System.Collections.Generic;
