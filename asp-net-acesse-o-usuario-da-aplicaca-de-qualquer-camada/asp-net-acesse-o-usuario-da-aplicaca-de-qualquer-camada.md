@@ -122,7 +122,7 @@ Em meu projeto de referência o Equinox Project esta abordagem está implementad
 
 Além disso deixei uma demo bem direto ao ponto aqui também:
 
-- [Demo](https://github.com/desenvolvedor-io/blog/tree/main/asp-net-acesse-o-usuario-da-aplicaca-de-qualquer-camada/Demo/AspNetUserDemo)
+- [Demo](https://github.com/EduardoPires/AspNetUserInjection)
 - [Equinox Project](https://github.com/EduardoPires/EquinoxProject)
 
 Espero que tenha gostado, não deixe de compartilhar e veja abaixo um curso que te ensinará tudo que precisa sobre ASP.NET :D
