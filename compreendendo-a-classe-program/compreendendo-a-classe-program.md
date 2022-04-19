@@ -27,11 +27,14 @@ Note que a classe Startup era chamada na declaração da configuração do host 
 
 Os desenvolvedores não ficaram muito felizes com a mudança, mas foi necessário.  A Microsoft focada em deixar o ASPNET cada vez mais a frente do Nodejs precisou começar a melhorar onde o ASPNET perdia para o Nodejs.
 
-Um dos principais pontos positivos para o Node é o warm-up da aplicação, sim uma aplicação Node ainda acorda e fica disponível mais rápido que o ASP.NET (depois ele perde rs). E nessa briga a Microsoft introduziu o conceito de Minimal APIs, que implementou o conceito de escrever uma API completa em uma única classe. Além disso no .NET 6 (e no 7) a Microsoft tem trabalhado muito nessa questão de melhorar o warm-up.
+Um dos principais pontos positivos para o Node é o warm-up da aplicação, sim uma aplicação Node ainda acorda e fica disponível mais rápido que o ASP.NET (depois ela perde rs).
+
+Nessa disputa a Microsoft introduziu o conceito de Minimal APIs, que implementou o conceito de escrever uma API completa em uma única classe. Além disso no .NET 6 (e no 7) a Microsoft tem trabalhado muito nessa questão de melhorar o warm-up.
 
 Entenda mais sobre Minimal APIs [aqui](https://www.youtube.com/watch?v=FWZhGFhpSLk) e aprenda a escrever uma Minimal API completa do zero [aqui](https://www.youtube.com/watch?v=aXayqUfSNvw)
 
 Podemos resumir então que a classe Startup se foi para dar espaço a uma prática mais direto ao ponto de configurar uma aplicação ASP.NET.
+
 Mas o que é essa lágrima rolando aí? Se for saudades da classe Startup eu vou te ensinar a trazer ela de volta mesmo nas novas versões e de maneira super elegante. [Assista aqui](https://www.youtube.com/watch?v=VgjHQvprRy0)
 
 Muitos alunos me perguntam sobre essa mudança, para mim é algo super simples de entender, mas eu também entendo que para uma pessoa que está estudando ASP.NET agora essa mudança pode ser mais chata de absorver. Para ajudar nessa dúvida comum recomendo muito que assista os vídeos recomendados acima e segue abaixo um guia de referência para entender a classe Program no novo formato.
@@ -52,18 +55,18 @@ Então a Program passou a ser essa classe direto ao ponto, os exemplos de códig
 
 ### Definição do WebApplicationBuilder
 
-O primeiro passo na escrita da Program é a criação do WebApplicationBuilder, que é a classe responsável por oferecer acesso a toda configuração da aplicação. É interessante que entenda a estrutura dessa classe, caso tenha essa curiosidade [veja aqui](https://github.com/dotnet/aspnetcore/blob/313ee06a672385ede5d2c9a01d31a7d9d35a6340/src/DefaultBuilder/src/WebApplicationBuilder.cs).
+O primeiro passo na escrita da Program é obter uma instância de `[WebApplicationBuilder]`, que é a classe responsável por oferecer acesso a toda configuração da aplicação. É interessante que entenda a estrutura dessa classe, caso tenha essa curiosidade [veja aqui](https://github.com/dotnet/aspnetcore/blob/313ee06a672385ede5d2c9a01d31a7d9d35a6340/src/DefaultBuilder/src/WebApplicationBuilder.cs).
 
 Na prática é tudo resolvido na primeira linha de código:
 
 ```csharp
 var builder = WebApplication.CreateBuilder(args);
 ```
-O método [CreateBuilder] retorna uma instância de WebApplicationBuilder.
+O método `[CreateBuilder]` retorna uma instância de WebApplicationBuilder.
 
 ### Configuração dos serviços
 
-Na classe Startup o primeiro método era o [ConfigureServices] que fazia a configuração dos serviços dentro do pipeline do ASP.NET, e isso permanece da mesma maneira na classe Program. Após definir o builder o próximo passo é configurar os serviços:
+Na classe Startup o primeiro método era o `[ConfigureServices]` que fazia a configuração dos serviços dentro do pipeline do ASP.NET, e isso permanece da mesma maneira na classe Program. Após definir o builder o próximo passo é configurar os serviços:
 
 ```csharp
 // Declaração do builder
@@ -96,7 +99,7 @@ var app = builder.Build();
 ```
 Podemos observar algumas coisas importantes:
 
-- O builder.Services é o acesso ao IServiceCollection (da mesma forma que era na Startup)
+- O builder.Services é o acesso ao `[IServiceCollection]` (da mesma forma que era na Startup)
 
 - A configuração dos serviços significa a adição de middlewares no pipeline, qualquer configuração do middleware feita nesse processo não poderá ser modificada conforme o comportamentos das chamadas da aplicação)
 
@@ -104,11 +107,11 @@ Podemos observar algumas coisas importantes:
 
 ### Configuração do request/response
 
-Na classe Startup o segundo método era o [Configure] que fazia a configuração do comportamento do request/response dos serviços na aplicação ASP.NET, e isso permanece da mesma maneira na classe Program. 
+Na classe Startup o segundo método era o `[Configure]` que fazia a configuração do comportamento do request/response dos serviços na aplicação ASP.NET, e isso permanece da mesma maneira na classe Program. 
 
-A única diferença é que a App é representada agora pela classe WebApplication e antigamente era pela interface IApplicationBuilder, mas não tem problema, pois a classe WebApplication implementa essa interface, mantendo muito código de versões anteriores compatíveis. Conheça um pouco mais da classe WebApplication [aqui](https://github.com/dotnet/aspnetcore/blob/f08285d0b6918fbb2b485d97f4e411dc9ea9a94f/src/DefaultBuilder/src/WebApplication.cs).
+A única diferença é que a App é representada agora pela classe `[WebApplication]` e antigamente era pela interface `[IApplicationBuilder]`, mas não tem problema, pois a classe WebApplication implementa essa interface, mantendo muito código de versões anteriores compatíveis. Conheça um pouco mais da classe WebApplication [aqui](https://github.com/dotnet/aspnetcore/blob/f08285d0b6918fbb2b485d97f4e411dc9ea9a94f/src/DefaultBuilder/src/WebApplication.cs).
 
-Seguindo na Program a partir do build da App temos o seguinte:
+Dando sequência na Program a partir do build da App (do código anterior) temos o seguinte:
 
 ```csharp
 // Aqui retorna uma instância de WebApplication (IApplicationBuilder)
@@ -156,9 +159,9 @@ Podemos observar novamente algumas coisas importantes:
 
 - É possível configurar comportamentos do request/response conforme o ambiente (Dev,Prod, etc)
 
-- A ordem das declarações AFETA TOTALMENTE o comportamento da aplicação, pois a execução do pipeline segue a ordem da declaração da Program. O erro mais comum de todos é chamar o UseAuthorization antes do UseAuthentication, a aplicação nunca vai autorizar uma Claim por ex. Muita atenção para a ordem das configurações ok?
+- A ordem das declarações **AFETA TOTALMENTE** o comportamento da aplicação, pois a execução do pipeline segue a ordem da declaração da Program. O erro mais comum de todos é chamar o UseAuthorization antes do UseAuthentication, a aplicação nunca vai autorizar uma Claim por ex. Muita atenção para a ordem das configurações ok?
 
-- Como visto na configuração a última linha [app.Run] precisa ser a última por motivos óbvios :)
+- Como visto na configuração a última linha `[app.Run]` precisa ser a última por motivos óbvios :)
 
 ### Viu só como não é um bicho de 7 cabeças?
 
