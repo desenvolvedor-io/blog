@@ -1,5 +1,3 @@
-# Compreendendo a classe Program
-
 ## A partir do .NET 6 a classe Program passou a ser a única classe de configuração de aplicações .NET, absorvendo as responsabilidades da Startup no ASPNET.
 
 A classe Program sempre esteve presente no ASP.NET, as vezes passava despercebida, pois na maioria das vezes não era necessário alterar a configuração padrão de hosting. Inclusive a classe Startup sempre foi uma forma de especializar a Program, afinal quem chamava a Startup era a Program.
