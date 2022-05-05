@@ -1,4 +1,4 @@
-## O Visual Studio Code é uma das melhores ferramentas do mercado, porém usuários de Visual Studio tradicional sempre passam por algumas dificuldades ao tentar reproduzir a mesma experiência no VS Code, uma delas é como rodar diversos projetos simultaneamente como no caso de uma solution com diversas APIs.
+## O Visual Studio Code é uma das melhores ferramentas do mercado, porém usuários de Visual Studio tradicional sempre passam por algumas dificuldades ao tentar reproduzir a mesma experiência no VS Code. Uma delas é como rodar diversos projetos simultaneamente como no caso de uma solution com diversas APIs.
 
 Vamos supor que você esteja com uma máquina nova em mãos e sem Visual Studio instalado. Você conseguiria trabalhar apenas no VS Code? 
 
@@ -172,5 +172,169 @@ Vamos começar criando um arquivo launch.json como anteriormente, porém um para
 
 Eu escolhi primeiro o projeto MVC e para seguir adicionando os demais cliquei em Add Configuration e depois escolhi a opção mais adequada *.NET Launch a local .NET Core Web App*. Fiz isto duas vezes e o resultado final ficou assim:
 
+```json
 
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Projeto Web",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/WebMvcSample/bin/Debug/net6.0/WebMvcSample.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/WebMvcSample",
+            "console": "internalConsole",
+            "stopAtEntry": false,            
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            }
+        },
+        {
+            "name": "Projeto WebAPI 1",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/WebApiSample_1/bin/Debug/net6.0/WebApiSample_1.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/WebApiSample_1",
+            "stopAtEntry": false,
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            }
+        },
+        {
+            "name": "Projeto WebAPI 2",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/WebApiSample_2/bin/Debug/net6.0/WebApiSample_2.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/WebApiSample_2",
+            "stopAtEntry": false,
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            }
+        }
+    ]
+}
 
+```
+
+Agora você pode iniciar seus projetos um a um e rodar quantos deles quiser simultaneamente:
+
+![image](https://user-images.githubusercontent.com/5068797/166866326-0cb705c5-c3ef-444a-9b84-cff117ef465d.png)
+
+Escolhendo qual projeto será executado os comandos de debug:
+
+![image](https://user-images.githubusercontent.com/5068797/166866419-5a86fc61-41c9-465c-9118-070affa800d7.png)
+
+## Iniciando todos projetos de uma vez
+
+Pois é Eduardo, eu achei legal, mas tenho vários projetos e queria subir todos eles com um clique, é possível?
+
+-Claro que é, afinal estou aqui para resolver todos os seus problemas 🦸‍♀️
+
+### Criando uma composição de inicialização
+
+Para selecionar todos os projetos que você quer inicializar juntos basta listar os nomes conforme configurados no launch.json:
+
+```json
+
+ "compounds": [
+        {
+            "name": "Iniciar todos",
+            "configurations": [
+                "Projeto Web",
+                "Projeto WebAPI 1",
+                "Projeto WebAPI 2"
+            ],
+            "stopAll": true
+        }
+    ]
+
+```
+
+O arquivo final ficará assim:
+
+```json
+
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Projeto Web",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/WebMvcSample/bin/Debug/net6.0/WebMvcSample.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/WebMvcSample",
+            "console": "internalConsole",
+            "stopAtEntry": false,            
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            }
+        },
+        {
+            "name": "Projeto WebAPI 1",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/WebApiSample_1/bin/Debug/net6.0/WebApiSample_1.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/WebApiSample_1",
+            "stopAtEntry": false,
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            }
+        },
+        {
+            "name": "Projeto WebAPI 2",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/WebApiSample_2/bin/Debug/net6.0/WebApiSample_2.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/WebApiSample_2",
+            "stopAtEntry": false,
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            }
+        }
+    ],
+    "compounds": [
+        {
+            "name": "Iniciar todos",
+            "configurations": [
+                "Projeto Web",
+                "Projeto WebAPI 1",
+                "Projeto WebAPI 2"
+            ],
+            "stopAll": true
+        }
+    ]
+}
+
+```
+
+E basta escolher a opção criada:
+
+![image](https://user-images.githubusercontent.com/5068797/166867004-9760de7b-0d9c-48af-87fc-f462412ead11.png)
+
+### Caso você tenha problemas para inicializar algum dos projetos (eu tive), force a criação da configuração deles via Omnisharp:
+
+> Ctrl + Shift + P
+> .NET Generate Assets for Build and Debug
+
+![image](https://user-images.githubusercontent.com/5068797/166867218-7b7deb4f-3aa5-4b69-bcc1-af857c09b752.png)
+
+## Sinceramente?
+
+Depois que eu dominei algumas técnicas no VS Code eu me sinto muito mais produtivo do que no Visual Studio tradicional.
+
+Recomendo que execute esse processo em nosso projeto DevStore, pois são 7 APIs e uma aplicação Web, é um desafio bem interessante.
+Não conhece? Confira abaixo e aproveite e nos dê uma estrela.
+
+[![ReadMe Card](https://github-readme-stats.vercel.app/api/pin/?username=desenvolvedor-io&repo=dev-store)](https://github.com/desenvolvedor-io/dev-store)
