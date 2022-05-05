@@ -114,3 +114,63 @@ Note que agora o VS Code lhe dará uma opção para iniciar seu projeto utilizan
 
 ![image](https://user-images.githubusercontent.com/5068797/166857686-6302b6ca-491a-4be2-a1fe-5d76cef1823a.png)
 
+Basta agora colocar um breakpoint na controller e verificar como a experiência de debug é bem agradável e completa no VS Code:
+
+![image](https://user-images.githubusercontent.com/5068797/166857854-bdb728e5-4b40-4c18-9bd7-d000163fcb39.png)
+
+## Executando diversos projetos simultaneamente
+
+Vamos supor que estamos trabalhando em uma solution com um projeto MVC e duas APIs e você precisa executar os 3 projetos simultaneamente para debug e etc.
+
+Primeiro vamos criar a solution e os projetos para que no Visual Studio tenha esse efeito:
+
+![image](https://user-images.githubusercontent.com/5068797/166858537-c21cec6f-fcdb-4cf6-8d50-17df7174ba37.png)
+
+Execute no console os comandos a seguir:
+
+```console
+
+-- Nova Solution
+dotnet new sln -n BlogSample
+
+-- Novo projeto Web MVC
+dotnet new mvc -n WebMvcSample
+
+-- Novo projeto WebAPI 1 e 2
+dotnet new api -n WebApiSample_1
+
+dotnet new api -n WebApiSample_2
+
+-- Adicionando Projeto MVC na Solution
+dotnet sln add WebMvcSample
+
+-- Adicionando Projeto API 1 e 2 na Solution / Pasta APIs
+dotnet sln add WebApiSample_1 --solution-folder APIs
+
+dotnet sln add WebApiSample_2 --solution-folder APIs
+
+-- Verificando se os 3 projetos foram adicionados na Solution
+dotnet sln list
+
+-- Output:
+
+Project(s)
+----------
+WebMvcSample\WebMvcSample.csproj
+WebApiSample_1\WebApiSample_1.csproj
+WebApiSample_2\WebApiSample_2.csproj
+
+-- Abrindo VS Code na pasta raiz
+
+code .
+
+```
+
+Vamos começar criando um arquivo launch.json como anteriormente, porém um para cada projeto, ao selecionar que deseja criar um arquivo para .NET (.NET Core) você poderá escolher o primeiro projeto:
+
+![image](https://user-images.githubusercontent.com/5068797/166859584-e65c746d-4864-4399-b2a3-bbf36b5fc89d.png)
+
+Eu escolhi primeiro o projeto MVC e para seguir adicionando os demais cliquei em Add Configuration e depois escolhi a opção mais adequada *.NET Launch a local .NET Core Web App*. Fiz isto duas vezes e o resultado final ficou assim:
+
+
+
