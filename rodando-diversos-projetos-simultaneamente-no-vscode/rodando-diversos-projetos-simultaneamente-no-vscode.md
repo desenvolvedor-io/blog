@@ -335,6 +335,7 @@ E basta escolher a opção criada:
 Depois que eu dominei algumas técnicas no VS Code eu me sinto muito mais produtivo do que no Visual Studio tradicional.
 
 Recomendo que execute esse processo em nosso projeto DevStore, pois são 7 APIs e uma aplicação Web, é um desafio bem interessante.
+
 Não conhece? Confira abaixo e aproveite e nos dê uma estrela.
 
 [![ReadMe Card](https://github-readme-stats.vercel.app/api/pin/?username=desenvolvedor-io&repo=dev-store)](https://github.com/desenvolvedor-io/dev-store)
