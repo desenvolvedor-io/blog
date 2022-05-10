@@ -64,11 +64,8 @@ Por que a pergunta é importante? Ao gerar uma Chave o tamanho dos Bytes importa
 
 O NIST publicou um documento [Recommendation for Applications Using Approved Hash Algorithms, Security Effect of the HMAC Key Section - 5.3.4](https://csrc.nist.gov/publications/detail/sp/800-107/rev-1/final) onde faz recomendações em relação a Chave e o Algoritmo que será utilizado.
 
-| "alg" 	| Algoritmo          	| Key Size  	|
-|-------	|--------------------	|-----------	|
-| HS256 	| HMAC using SHA-256 	| 64 bytes  	|
-| HS384 	| HMAC using SHA-384 	| 128 bytes 	|
-| HS512 	| HMAC using SHA-512 	| 128 bytes 	|
+![image](https://user-images.githubusercontent.com/7241156/167740499-fd529bba-325d-4622-82a9-bb87b5686da6.png)
+
 
 Assim como o NIST a própria Microsoft reforça o tamanho da chave, links ao final.
 
