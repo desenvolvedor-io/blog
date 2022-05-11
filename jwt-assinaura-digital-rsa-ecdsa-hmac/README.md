@@ -381,7 +381,7 @@ public static void Run()
 ```
 
 
-## Componente Jwks.Manager
+## Componente Security.Jwt
 
 Ao invés de fazer cada um desses algoritmos no braço e escolher aonde salvar, recomendo a utilização do componente [NetDevPack Security.Jwt](https://github.com/NetDevPack/Security.Jwt) que irá não só gerar o JWK, como fazer a gestão dele e eventualmente expirar após um tempo pré determinado.
 
