@@ -1,10 +1,6 @@
-# ASP.NET Core - Como assinar digitalmente seu JWT
+## Quando decidimos utilizar JWT em nossas API's e frontend SPA, precisamos utilizar um algoritmo para emitir um token. Há diversas opções para assinar o JWT. Ele deve ser simétrico ou assimétrico. Probabilistico ou deterministico. Veja neste artigo como assinar digitalmente seu JWT utilizando ASP.NET Core
 
-Quando decidimos utilizar JWT em nossas API's e Frontend SPA, precisamos utilizar um algoritmo ao emitir um token. Há diversas opções para assinar o JWT. Ele deve ser simétrico ou assimétrico. Probabilistico ou deterministico. Veja neste artigo como assinar seu JWT e dicas no uso deles.
-
-<img src="https://images.unsplash.com/photo-1579728866437-6397f3d89ec3?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=2000&fit=max&ixid=eyJhcHBfaWQiOjExNzczfQ"/>
-
-Ao gerar um JWT, é necessário informar um algoritmo de criptografia. Veja exemplo:
+Ao gerar um JWT é necessário informar um algoritmo de criptografia. Como por exemplo:
 
 ```csharp
 // gerador de jws / jwe
@@ -30,48 +26,47 @@ Além do RSA é possivel utilizar chaves simétricas e ECDSA.
 
 Para saber escolher o algoritmo, é necessário entender onde cada um deles se encaixa.
 
-## Algoritmo
+## Algoritmos
 
-Um algoritmo de criptografia pode ser considerado como uma fórmula. É um conjunto de procedimentos matemáticos. E através do uso desse algoritmo, as informações são transformadas em Ciphertext (texto cifrado) e requerem o uso de uma chave para transformar os dados em sua forma original.
+Um algoritmo de criptografia pode ser considerado como uma fórmula, pois é um conjunto de procedimentos matemáticos. Através do uso desse algoritmo as informações são transformadas em Ciphertext (texto cifrado) e requerem o uso de uma chave para transformar os dados em sua forma original.
 
 ![crypto](https://www.brunobrito.net.br/content/images/2020/02/crypto.gif)
 
 ## JWT com chave simétrica
 
-Ao usar um algoritmo simétrico, uma única chave é usado. Tanto para criptografar os dados quanto na descriptografia. Nesse caso, as duas partes envolvidas numa comunicação precisam ter a chave. Seja para leitura, ou para escrever uma nova.
+Para utilizar um algoritmo simétrico é necessário apenas uma única chave, pois ela será utilizada para criptografar os dados e na descriptografia dos mesmos. Nesse caso as duas partes envolvidas numa comunicação precisam ter a chave, seja para leitura ou para escrever uma nova.
 
 ![symmetric-encryption-1](https://www.brunobrito.net.br/content/images/2020/02/symmetric-encryption-1.png)
 
 ### HMAC
 
-Hash-Based Message Authentication Codes (HMACs) são um grupo de algoritmos que utilizam uma chave simétrica para assinar as mensagens e sua segurança está ligado a função hash utilizada, por exemplo, SHA256.
+Hash-Based Message Authentication Codes (HMACs) são um grupo de algoritmos que utilizam uma chave simétrica para assinar as mensagens e sua segurança está ligada a função hash utilizada, por exemplo, SHA256.
 
 ### Quando utilizar uma chave simétrica?
 
-Apenas em cenários onde haverá UMA única API. Pois, as demais API's não irão ter habilidade para validar o JWS, a menos que a chave privada seja compartilhada entre as API's. 
+Apenas em cenários onde haverá UMA única API, pois as demais API's não irão ter habilidade para validar o JWS, ao menos que a chave privada seja compartilhada entre as API's. 
 
 Se você trabalha num time pequeno esse risco pode ser tolerável. Em times médios e grandes é uma potencial brecha de segurança. 
 
-Afinal, qualquer time em posse da chave privada pode gerar Tokens e fazer impersonate nas permissões e usuários. Conseguindo acessos privilegiados em suas API's.
+Afinal... Qualquer time em posse da chave privada poderá gerar Tokens e fazer impersonate das permissões e usuários, assim conseguindo acessos privilegiados em suas API's.
 
-O problema no fim é garantir que sua chave será devidamente armazenada. E somente compartilhada por entidades confiáveis.
+No final do dia o desafio é garantir que a sua chave será devidamente armazenada e somente compartilhada por entidades confiáveis.
 
 ### Gerando uma chave simétrica HMAC
 
 Ao gerar uma chave simétrica você deve se questionar: Somente uma API vai gerar o JWT ou mais serviços terão esse direito? (Não há problema se no futuro essa estratégia mudar).
 
-Por que a pergunta é importante? Ao gerar uma Chave o tamanho dos Bytes importam. Há recomendações sobre o tamanho da chave.
+Por que essa pergunta é importante? Ao gerar uma chave o tamanho dos bytes importam, há recomendações sobre o tamanho da chave.
 
-O NIST publicou um documento [Recommendation for Applications Using Approved Hash Algorithms, Security Effect of the HMAC Key Section - 5.3.4](https://csrc.nist.gov/publications/detail/sp/800-107/rev-1/final) onde faz recomendações em relação a Chave e o Algoritmo que será utilizado.
+O NIST publicou um documento [Recommendation for Applications Using Approved Hash Algorithms, Security Effect of the HMAC Key Section - 5.3.4](https://csrc.nist.gov/publications/detail/sp/800-107/rev-1/final) onde faz importantes recomendações em relação a chave e o algoritmo que será utilizado.
 
 ![image](https://user-images.githubusercontent.com/7241156/167740499-fd529bba-325d-4622-82a9-bb87b5686da6.png)
 
+Assim como o NIST a própria Microsoft reforça o tamanho da chave (links no final).
 
-Assim como o NIST a própria Microsoft reforça o tamanho da chave, links ao final.
+Sabendo disto, é possível gerar uma chave automaticamente com os componentes do .NET, dessa forma a API poderá armezenar a chave em algum lugar e recuperar toda vez que for assinar um JWT. Isso garante segurança, pois uma vez que o registro for removido uma nova chave totalmente aleatória será gerada.
 
-Sabendo disto é possível gerar uma chave automaticamente com os componentes do .Net. Dessa forma a única API pode armezenar a chave em algum lugar. E recuperar toda vez que for assinar um JWT. Isso garante segurança, uma vez que o registro for removido, uma nova chave, totalmente aleatória será gerada.
-
-Fazendo desta forma haverá uma burocracia a mais, pois compartilhar a chave, significa compartilhar o JWK. Seja através de um arquivo físico ou pelo Banco de dados.
+Fazendo desta forma haverá uma pequena burocracia extra, pois compartilhar a chave significa compartilhar o JWK. Seja através de um arquivo físico ou pelo banco de dados.
 
 ```csharp
 static void Main(string[] args)
@@ -129,11 +124,11 @@ private static byte[] GenerateHmacKey(int bytes)
 }
 ```
 
-No exemplo o que merece destaque é a utilização do objeto `System.Security.Cryptography.RandomNumberGenerator` para a geração da chave.
+Neste exemplo o que merece destaque é a utilização do objeto `[System.Security.Cryptography.RandomNumberGenerator]` para a geração da chave.
 
-Essa implementação acima possui um problema. Caso a aplicação reinicie as chaves irão renovar, invalidando os tokens gerados anteriormente. 
+Entretanto essa implementação acima possui um problema. Caso a aplicação reinicie as chaves serão renovadas, assim invalidando os tokens gerados anteriormente.
 
-Para resolver esse problema o objeto `JsonWebKey` tem o objetivo de salvar os parâmetros da criptografia. Assim caso a aplicação seja reiniciada, basta verificar se existe esse objeto e recuperar. Caso contrário, cria uma nova.
+Para resolver esse problema o objeto `[JsonWebKey]` tem como objetivo salvar os parâmetros da criptografia. Assim caso a aplicação seja reiniciada basta verificar se o objeto existe e o recuperar. Caso contrário será criado um novo.
 
 ```csharp
 static void Main(string[] args)
@@ -197,14 +192,9 @@ private static byte[] GenerateHmacKey(int bytes)
 }
 ```
 
-Repare que o código utiliza o componente ==JsonWebKey==, que abordamos em outro artigo: [Componentes do JWT (JWS, JWE, JWA, JWK, JWKS)](https://www.brunobrito.net.br/jose-jwt-jws-jwe-jwa-jwk-jwks/).
-
-
-
-
 ## JWT com chave assimétrica
 
-Um algoritmo assimétrico envolve duas chaves. Uma chave pública e outra chave privada. Enquanto uma chave (privada) é usada para assinar digitalmente a mensagem a outra chave (pública) só pode ser usada para verificar a autenticidade da assinatura. 
+Um algoritmo assimétrico envolve duas chaves, uma chave pública e outra chave privada. Enquanto uma chave (privada) é usada para assinar digitalmente a mensagem a outra chave (pública) só pode ser usada para verificar a autenticidade da assinatura. 
 
 ![asymmetric-encryption-1](https://www.brunobrito.net.br/content/images/2020/02/asymmetric-encryption-1.png)
 
@@ -212,23 +202,22 @@ A [RFC 7518](https://tools.ietf.org/html/rfc7518) define os algoritmos RSA e ECD
 
 ### RSA
 
-RSA é o acrônimo de Rivest–Shamir–Adleman. É uma criptografia criada em 1977. E revolucionou os métodos utilizados na época. Pois introduziu o conceito de chaves assimétricas. 
-
-Até então os modelos de criptografia utilizam a mesma chave para criptografar e descriptografar a mensagem.
+RSA é o acrônimo de Rivest–Shamir–Adleman. É uma criptografia criada em 1977. E revolucionou os métodos utilizados na época, pois introduziu o conceito de chaves assimétricas. Até então os modelos de criptografia utilizavam a mesma chave para criptografar e descriptografar mensagens.
 
 O RSA é muito utilizado para criar assinaturas digitais. O proprietário da chave privada é o único capaz de assinar uma mensagem. Enquanto a chave pública permite que qualquer entidade verifique a validade da assinatura.
 
 ### Elliptic Curves - ECDsa
 
-Há diversas explicações técnicas sobre ECC (*Elliptic Curve Cryptography*). Links abaixo para curiosos. De maneira pratica o EC é melhor e mais eficiente que o RSA. Especialistas e mais entendidos sobre o assunto, dizem que o ECC revolucionou os algoritmos assimétricos.
+Há diversas explicações técnicas sobre ECC (*Elliptic Curve Cryptography*). [Links abaixo para curiosos]. De maneira pratica o EC é melhor e mais eficiente que o RSA. Especialistas e entendidos sobre o assunto dizem que o ECC revolucionou os algoritmos assimétricos.
 
 ### Quando utilizar chave assimétrica?
 
-A melhor resposta seria, sempre que possível. Porém em ambientes que possuem uma única API. Que não há uma URI para consultar a chave pública. Não é um servidor OAuth 2.0. Não será um grande diferencial. 
+A melhor resposta seria: Sempre que possível! 
+Em ambientes que possuem uma única API, que não há uma URI para consultar a chave pública e não é um servidor OAuth 2.0. Não será um grande diferencial.
 
-Mas considere que se você adotou a estratégia do exemplo anterior. E começou a salvar a chave (JWK) em algum local como Filesystem, banco de dados ou Blob. Passar a utilizar chaves assimétrica vai conferir um nível a mais de segurança.
+Agora considere que se você adotou a estratégia do exemplo anterior, começou a salvar a chave (JWK) em algum local como filesystem, banco de dados ou blob, então passar a utilizar chaves assimétricas vai fornecer um nível a mais de segurança.
 
-Se estiver em um ambiente OAuth 2.0. A utilização de chaves assimétricas é obrigatório, devido a natureza da especificação do OAuth 2.0.
+OBS - Se estiver em um ambiente OAuth 2.0, a utilização de chaves assimétricas é obrigatório! Devido a natureza da especificação do OAuth 2.0.
 
 ### Gerando RSASSA-PSS using SHA-256 and MGF1 with SHA-256
 
@@ -269,9 +258,9 @@ private static TokenValidationParameters TokenValidationParams = new TokenValida
 };
 ```
 
-* O tamanho `2048` é o mínimo especificado pela RFC 7518 - section 3.5.
+* O tamanho `[2048]` é o mínimo especificado pela RFC 7518 - section 3.5.
 
-A utilização do RSA através do .NET é muito simples. Utilizando a mesma técnica do exemplo anterior. É possível salvar os dados da chave criada e assim recarregar a mesma chave quando a aplicação reiniciar.
+A utilização do RSA através do .NET é muito simples. Utilizando a mesma técnica do exemplo anterior é possível salvar os dados da chave criada e assim recarregar a mesma chave quando a aplicação reiniciar.
 
 ```csharp
 public static void Run()
@@ -301,13 +290,13 @@ public static void Run()
 }
 ``` 
 
-Simples, né?
+Bem simples né?
 
 ### Gerando ECDSA using P-256 and SHA-256 
 
 Esse é o algoritmo mais recomendado pela RFC para utilizar na assinatura do seu JWT.
 
-Igualmente ao RSA, sua utilização é simples.
+Igualmente ao RSA, sua utilização é muito simples:
 
 ```csharp
 private static DateTime Now = DateTime.Now;
@@ -349,9 +338,7 @@ public static void Run()
 
 A curva Nist P256 é especificado na própria RFC, por isso está sendo utilizada.
 
-Para salvar em disco, ou em outro local, há um pequeno pormenor. O método da classe `JsonWebKeyConverter`, utilizado nos exemplos anteriores não está disponível para ==netstandard2.1==. Por causa de um bug na biblioteca `Microsoft.IdentityModel.JsonWebTokens`. Já reportado no [Github](https://github.com/AzureAD/azure-activedirectory-identitymodel-extensions-for-dotnet/issues/1338).
-
-No entanto, é muito simples fazer um parse manualmente.
+Para salvar em disco ou em outro local é muito simples fazer um parse:
 
 ```csharp
 public static void Run()
@@ -396,12 +383,9 @@ public static void Run()
 
 ## Componente Jwks.Manager
 
-Ao invés de fazer cada um desses algoritmos no braço, escolher aonde salvar. Recomendo a utilização do componente [Jwks.Manager](https://www.nuget.org/packages/Jwks.Manager/) que irá não só gerar o JWK, como fazer a gestão dele e eventualmente expirar após um tempo pré determinado.
-
+Ao invés de fazer cada um desses algoritmos no braço e escolher aonde salvar, recomendo a utilização do componente [NetDevPack Security.Jwt](https://github.com/NetDevPack/Security.Jwt) que irá não só gerar o JWK, como fazer a gestão dele e eventualmente expirar após um tempo pré determinado.
 
 ## Download
-
-<img src="https://github.com/ashleymcnamara/artwork/blob/master/clippy_octocat.png?raw=true" width="250" class="center" />
 
 O código do projeto está disponível no meu [GitHub](https://github.com/brunohbrito/Tests-RSA-ECDsa-HMAC-JWK)
 
