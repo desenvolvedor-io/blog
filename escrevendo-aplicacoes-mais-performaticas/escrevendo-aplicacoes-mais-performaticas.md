@@ -1,23 +1,30 @@
-## Abordaremos neste artigo um dos assuntos que é extremamente importante para uma aplicação muito mais performática e muita das vezes somos omissos seja por falta de conhecimento ou por existir uma demanda de entregas rápidas em nosso dia-a-dia e sempre deixamos melhorias de performance como dívida técnica, pois bem aqui é onde mora o perigo, na maioria das vezes não costumamos pagar esse tipo de dívida seja por esquecimento ou por existir a necessidade de entregar novas features, mas de alguma forma o universo costuma cobrar da gente e geralmente é da pior forma possível, um exemplo simples e que acontece frequentemente é o conhecido crash de container por falta de recurso seja memória ou disco.
+## Escrever aplicações mais performática é uma das principais missão de um desenvolvedor (ou ao menos deveria ser)
+
+Abordaremos neste artigo um dos assuntos que é extremamente importante para uma aplicação mais performática e muitas vezes somos omissos seja por falta de conhecimento ou por existir uma demanda de entregas rápidas em nosso dia-a-dia.
+
+Muitas vezes deixamos melhorias de performance como dívida técnica, porém é ai onde mora o perigo, na maioria das vezes não costumamos pagar esse tipo de dívida seja por esquecimento ou por existir mais demandas, todas com alta prioridade.
+
+De alguma forma o mundo costuma cobrar da gente e nesses casos geralmente é da pior forma possível...
 
 ## Introdução
-Estamos vivendo a era da computação em nuvem, onde frequentemente ouvimos falar de sistemas distribuídos, resiliência, escalabilidade horizontal e outras coisas legais, 
-pois bem uma dessas coisas legais é o Kubernetes, geralmente utilizamos ele para fornecer a capacidade de escalar o processamento de dados e fornecer várias instâncias 
-de nossas aplicações, com isso limitamos os recursos de cada pod/container para usar a menor unidade de recurso possível, sendo assim customizamos o limite de memória 
-que será utilizado, aqui é onde começamos a pensar fora da caixa, ou seja, será que estamos nos preocupando com essa limitação de recurso?! 
+Estamos vivendo a era da computação em nuvem, onde frequentemente ouvimos falar de sistemas distribuídos, resiliência, escalabilidade horizontal e outras coisas legais, pois bem uma dessas coisas legais é o Kubernetes e geralmente utilizamos ele para fornecer a capacidade de escalar o processamento de dados e fornecer várias instâncias de nossas aplicações, com isso limitamos os recursos de cada pod/container para usar a menor unidade de recurso possível, sendo assim customizamos o limite de memória que será utilizado, aqui é onde começamos a pensar fora da caixa, ou seja, será que estamos nos preocupando com essa limitação de recurso?!
+
 Memory leak é um dos problemas mais comuns que ocorrem em uma aplicação dentro de um container por falta do bom gerenciamento de memória, sendo assim vamos ver como 
 podemos escrever aplicações mais performáticas fazendo um bom gerenciamento de memória. Faremos um compilado de dicas e boas práticas para obter o melhor desempenho 
 com .NET em nossas aplicações diminuindo alocações na memória e coletas do GC (Garbage Collector).
 
-Vamos colocar a mão na massa!
+### Vamos colocar a mão na massa!
 
 ## Destrutores são um pesadelo para sua aplicação
-Em .NET todo objeto que herda o tipo class pode ter um construtor e um destrutor. Geralmente usamos no destrutor instruções para limpar objetos na memória não 
-gerenciada ou seja, que não estão na Heap, com isso evitamos vazamento de memória, mas existe outra forma de fazer isso, um exemplo é utilizar um Pattern Dispose, 
-a coleta feita pelo GC na geração 0 é a mais rápida, mas quando usamos finalizadores e o GC inicializa o ciclo de coleta e encontra um objeto com um destrutor, esse 
+Em .NET todo objeto que herda o tipo class pode ter um construtor e um destrutor. 
+
+Geralmente usamos no destrutor instruções para limpar objetos na memória não gerenciada ou seja, que não estão na Heap, com isso evitamos vazamento de memória, mas existe outra forma de fazer isso, um exemplo é utilizar um Pattern Dispose.
+
+A coleta feita pelo GC na geração 0 é a mais rápida, mas quando usamos finalizadores e o GC inicializa o ciclo de coleta e encontra um objeto com um destrutor, esse 
 objeto sobrevive à primeira coleta e é promovido para próxima geração sendo colocado em uma de fila de finalização, portanto quando é chamado o Finalize internamente 
-pela thread dedicada e responsável por fazer essas execuções o objeto se torna legível para ser recuperado e liberado da memória, para provar isso faremos um benchmark 
-para ver o quão custoso é um destrutor em sua classe mesmo que esteja vazio, que para muitos pode ser inofensivo.
+pela thread dedicada e responsável por fazer essas execuções o objeto se torna legível para ser recuperado e liberado da memória. 
+
+Para provar isso faremos um benchmark para ver o quão custoso é um destrutor em sua classe mesmo que esteja vazio, que para muitos pode ser inofensivo.
 
 ### As seguintes classes serão utilizadas como exemplos:
 
@@ -100,21 +107,20 @@ Intel Core i7-7500U CPU 2.70GHz (Kaby Lake), 1 CPU, 4 logical and 2 physical cor
 ```
 
 Fica óbvio que podemos degradar consideravelmente a performance de nossa aplicação, mesmo usando um destrutor vazio temos um custo alto de aproximadamente 
-1700% ao utilizar classes com destrutor comparado a uma classe que não possui destrutor, observando melhor temos vários objetos que foram promovidos para geração 1, 
-apenas só por existir um destrutor vazio na classe, sendo assim se existir a necessidade de liberar recursos na memória não gerenciada utilize o Pattern Dispose 
-você vai ter um melhor ganho de performance além de diminuir significativamente a quantidade de coletas feitas pelo GC.
+1700% ao utilizar classes com destrutor comparado a uma classe que não possui destrutor. 
 
-## Concatenar string ou utilizar StringBuilder ?
+Observando melhor temos vários objetos que foram promovidos para geração 1, apenas só por existir um destrutor vazio na classe, sendo assim se existir a necessidade de liberar recursos na memória não gerenciada utilize o Pattern Dispose, você vai ter um melhor ganho de performance além de diminuir significativamente a quantidade de coletas feitas pelo GC.
+
+## Concatenar string ou utilizar StringBuilder?
 
 É muito comum existir a necessidade de concatenar strings durante o ciclo de desenvolvimento de um software, muitas das vezes é por existir a necessidade de 
-construir algum tipo de informação com objetivo de passar para um algoritmo que possa processar esse dado, uma string é um dado imutável, significa que quando 
-queremos concatenar um caractere ou uma nova cadeia de caracteres a uma string o que está acontece na verdade é uma nova cópia na memória com os dados novos 
-concatenados.
+construir algum tipo de informação com objetivo de passar para um algoritmo que possa processar esse dado. 
+
+Uma string é um dado imutável, significa que quando queremos concatenar um caractere ou uma nova cadeia de caracteres a uma string o que está acontece na verdade é uma nova cópia na memória com os dados novos concatenados.
 
 ![image](https://user-images.githubusercontent.com/5068797/169920546-0dece42e-3731-4640-8813-b209a4a295dd.png)
 
-Quando usamos StringBuilder o que acontece é um comportamento um pouco diferente, basicamente ele reserva um espaço na memória e os novos caracteres são inseridos nesse buffer sem existir a necessidade de fazer uma nova cópia na memória dos 
-dados que estão sendo inseridos.
+Quando usamos StringBuilder o que acontece é um comportamento um pouco diferente, basicamente ele reserva um espaço na memória e os novos caracteres são inseridos nesse buffer sem existir a necessidade de fazer uma nova cópia na memória dos dados que estão sendo inseridos.
 
 ![image](https://user-images.githubusercontent.com/5068797/169920571-dfac00b6-c867-4f89-a2e8-a7179b160478.png)
 
@@ -247,9 +253,9 @@ Intel Core i7-7500U CPU 2.70GHz (Kaby Lake), 1 CPU, 4 logical and 2 physical cor
 ```
 
  Fica explicitamente claro que temos um ganho de aproximadamente 260% ao utilizar o Regex compilado, quando estamos processando um alto volume de dados isso 
- faz toda diferença, mas certamente podemos melhorar isso e pensar um pouco fora da caixa, o uso do Regex gera um pequeno custo adicional no quesito performance 
- em nossa aplicação, existem cenários que podemos escrever nosso próprio algoritmo para fazer pequenas otimizações e esse é um deles, não necessariamente 
- precisamos de Regex para saber se existe ou não número em uma string, vamos então vamos utilizar seguinte método para comparar a performance.
+ faz toda diferença, mas certamente podemos melhorar isso e pensar um pouco fora da caixa. 
+ 
+ O uso do Regex gera um pequeno custo adicional no quesito performance  em nossa aplicação, existem cenários que podemos escrever nosso próprio algoritmo para fazer pequenas otimizações e esse é um deles, não necessariamente precisamos de Regex para saber se existe ou não número em uma string, vamos então vamos utilizar seguinte método para comparar a performance.
 
 ```csharp
 [Benchmark]
@@ -301,11 +307,11 @@ Intel Core i7-7500U CPU 2.70GHz (Kaby Lake), 1 CPU, 4 logical and 2 physical cor
 ```
 
 Fica claro que tivemos um absurdamente de performance comparado com o Regex, se analisar corretamente temos um ganho de aproximadamente 590% sobre o Regex 
-compilado e 1.560% sobre o Regex interpretado isso só prova que sempre que possível devemos escrever nossos próprios algoritmos, vamos ver uma das grandes 
-desvantagens de utilizar o Regex de forma errônea, o cenário é o seguinte, você não quer escrever algoritmos e quer se beneficiar da performance do Regex 
-compilado dado que ele é mais performático que o interpretado certo? Errado, se não souber usar ele de forma correta pode ser seu maior problema de performance, 
-em vez de utilizar as instâncias do Regex estaticamente como apresentado anteriormente vamos instanciar a cada execução e comparar sua performance, vamos utilizar 
-os seguintes métodos:
+compilado e 1.560% sobre o Regex interpretado.
+
+Isso só prova que sempre que possível devemos escrever nossos próprios algoritmos, vamos ver uma das grandes desvantagens de utilizar o Regex de forma errônea, o cenário é o seguinte, você não quer escrever algoritmos e quer se beneficiar da performance do Regex compilado dado que ele é mais performático que o interpretado certo? 
+
+Errado! Se não souber usar ele de forma correta pode ser seu maior problema de performance, em vez de utilizar as instâncias do Regex estaticamente como apresentado anteriormente vamos instanciar a cada execução e comparar sua performance, vamos utilizar os seguintes métodos:
 
 ```csharp
 [Benchmark]
@@ -358,10 +364,9 @@ Intel Core i7-7500U CPU 2.70GHz (Kaby Lake), 1 CPU, 4 logical and 2 physical cor
 ```
 
 Não é porque o Regex é compilado que será sempre mais rápido, como podemos observar ele ficou drasticamente muito mais lento e fez com que objetos fossem 
-promovidos praticamente em todas as gerações pelo GC além de alocar muitos objetos na memória, podemos resolver isso? Sim, Essa lentidão apresentada é porque 
-existe um custo no momento de criar uma instância do objeto Regex, isso porque o código do Regex é compilado em tempo de execução para ser otimizado, uma boa 
-prática para melhorar a performance é reutilizar a instância do objeto, se sua aplicação não tem a necessidade constante de alterar a expressão que o regex irá 
-utilizar então instanciar os objetos irá fazer com o tempo utilizado na compilação seja evitado.
+promovidos praticamente em todas as gerações pelo GC além de alocar muitos objetos na memória, podemos resolver isso? 
+
+Sim! Essa lentidão apresentada é porque existe um custo no momento de criar uma instância do objeto Regex, isso porque o código do Regex é compilado em tempo de execução para ser otimizado, uma boa prática para melhorar a performance é reutilizar a instância do objeto, se sua aplicação não tem a necessidade constante de alterar a expressão que o regex irá utilizar então instanciar os objetos irá fazer com o tempo utilizado na compilação seja evitado.
 
 Uma outra dica importante ao utilizar o Regex é aplicar Timeout dado que nossas expressões se beneficiam de retrocesso com objetivo de fazer otimização, 
 para mais informações sobre retrocesso basta acessar: Microsoft retrocesso, o timeout garante que a expressão seja validada dentro de uma janela de tempo 
