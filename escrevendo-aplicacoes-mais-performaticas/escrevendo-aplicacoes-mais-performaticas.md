@@ -256,7 +256,7 @@ Intel Core i7-7500U CPU 2.70GHz (Kaby Lake), 1 CPU, 4 logical and 2 physical cor
  Fica explicitamente claro que temos um ganho de aproximadamente 260% ao utilizar o Regex compilado, quando estamos processando um alto volume de dados isso 
  faz toda diferença, mas certamente podemos melhorar isso e pensar um pouco fora da caixa. 
  
- O uso do Regex gera um pequeno custo adicional no quesito performance  em nossa aplicação, existem cenários que podemos escrever nosso próprio algoritmo para fazer pequenas otimizações e esse é um deles, não necessariamente precisamos de Regex para saber se existe ou não número em uma string, vamos então vamos utilizar seguinte método para comparar a performance.
+ O uso do Regex gera um pequeno custo adicional no quesito performance  em nossa aplicação, existem cenários que podemos escrever nosso próprio algoritmo para fazer pequenas otimizações e esse é um deles, não necessariamente precisamos de Regex para saber se existe ou não número em uma string, então vamos utilizar o seguinte método para comparar a performance.
 
 ```csharp
 [Benchmark]
@@ -307,7 +307,7 @@ Intel Core i7-7500U CPU 2.70GHz (Kaby Lake), 1 CPU, 4 logical and 2 physical cor
 | MetodoCustomizado | 10000 |       162.689 us |      3.1943 us |      4.5811 us |
 ```
 
-Fica claro que tivemos um absurdamente de performance comparado com o Regex, se analisar corretamente temos um ganho de aproximadamente 590% sobre o Regex 
+Fica claro que tivemos um ganho muito significativo de performance comparado com o Regex, se analisar corretamente temos um ganho de aproximadamente 590% sobre o Regex 
 compilado e 1.560% sobre o Regex interpretado.
 
 Isso só prova que sempre que possível devemos escrever nossos próprios algoritmos, vamos ver uma das grandes desvantagens de utilizar o Regex de forma errônea, o cenário é o seguinte, você não quer escrever algoritmos e quer se beneficiar da performance do Regex compilado dado que ele é mais performático que o interpretado certo? 
