@@ -1,4 +1,4 @@
-## Coleções são estruturas de dados essenciais em qualquer linguagem. No .NET temos implementações genéricas como `[IList<T>]`, `[ICollection<T>]`, `[IEnumerable<T>]` que são super importantes e de domínio obrigatório para a escrita de código performático.
+## Coleções são estruturas de dados essenciais em qualquer linguagem. No .NET temos implementações genéricas como `[IList<T>]`, `[ICollection<T>]` e `[IEnumerable<T>]` que são super importantes e de domínio obrigatório para a escrita de código performático.
   
 O uso de coleções sempre foi um tema muito interessante de tratar, toda vez que falamos sobre coleções estamos falando também de LINQ, que na minha opinião foi a implementação
 mais importante no ecosistema .NET e é algo que todo desenvolvedor(a) deveria dominar.
