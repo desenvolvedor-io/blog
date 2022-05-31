@@ -83,7 +83,7 @@ public interface IList<T> : ICollection<T>, IEnumerable<T>, IEnumerable
 
 > **Quando usar?**
 > 
-> Quando precisar de tudo que existe no IColletion<`T`> e tiver a necessidade de acessar diretamente um objeto de sua coleção por meio de um índice.
+> Quando precisar de tudo que existe no `[IColletion<T>]` e tiver a necessidade de acessar diretamente um objeto de sua coleção por meio de um índice.
 
 ```csharp
 var list = new List<string>{"A","B","C"};
