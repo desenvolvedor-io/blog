@@ -1,4 +1,4 @@
-IoC - Inversion of Control é a melhor estratégia para escrever código com baixo acoplamento. Facilita a criação de testes, separa as dependências e isola o domínio.
+## IoC - Inversion of Control é a melhor estratégia para escrever código com baixo acoplamento. Facilita a criação de testes, separa as dependências e isola o domínio.
 
 ## O que é
 
