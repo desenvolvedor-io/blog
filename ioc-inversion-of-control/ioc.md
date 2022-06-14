@@ -166,7 +166,7 @@ Como num passe de mágica tudo continua funcionando! Sem a necessidade de altera
 
 No código acima foram criadas as instâncias das classes diretamente nos parâmetros, porém o certo seria fazer o uso das interfaces.
 
-O mecanismo que oferece as instâncias de classes que implementam as interfaces é chamado de mecanismo de DI. Ou seja, ao injetar uma interface no construtor de uma classe você estará dizendo a este mecanismo.
+O mecanismo que oferece as instâncias de classes que implementam as interfaces é chamado de mecanismo de DI. Ou seja, ao injetar uma interface no construtor de uma classe é como você estivesse dizendo a este mecanismo:
 
 -Hey, me dê uma instância da classe que implementa esse contrato aqui!
 
