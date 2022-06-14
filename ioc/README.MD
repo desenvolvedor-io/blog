@@ -1,152 +1,204 @@
-# Inversion of Control
+IoC - Inversion of Control é a melhor estratégia para escrever código com baixo acoplamento. Facilita a criação de testes, separa as dependências e isola o domínio.
 
-IoC é a melhor estratégia para desacoplar um sistema. Facilita a criação de testes, separa as dependências e isola o domínio.
+## O que é
 
-### O que é
+IoC é uma estratégia de inversão de controle. Muitas pessoas entendem IoC e DI (Dependency Injection) como a mesma coisa, porém DI é apenas uma das maneiras de se fazer IoC.
 
-De acordo com Wikipédia “Inversão de controle, IoC,  é um princípio abstrato que descreve o aspecto do design e arquitetura de software no qual o fluxo de controle do sistema é invertido em comparação com a programação procedural”.
+Outra maneira de se fazer IoC é utilizar AOP (Aspect Oriented Programming). Durante o processo de compilação trechos de código são injetados em determinada classe, assim evitando o forte acoplamento durante a escrita do código.
 
-Com o IoC é possível manter o domínio limpo. Sem necessidade de dependências diretas. Isola o domínio separando “o que de deve ser feito” do “como deve ser feito”. Melhora a legibilidade do código. Deixa o código flexível para as futuras modificações e facilita na criacao dos testes unitários.
+Com o IoC é possível manter o domínio limpo e as responsabilidades segregadas. É basicamente separar “*o que de deve ser feito*” do “*como deve ser feito*”.
 
-### Por que?
+Aplicar IoC melhora a legibilidade do código e o mantém flexível para as futuras modificações, além possibilitar a criação de testes de unidade.
 
-As melhores práticas de engenharia e design de software defendem a utilização do princípio SOLI**D**, sendo inversão de dependência um destes princípios. 
+## Por que?
 
-Seguir melhores práticas é como cortar um atalho. Existem outros caminhos, mas seguir por este aumenta as chances de sucesso. Os benefícios a longo prazo traz ganhos na qualidade do software. Há uma relação direta entre a criação de testes e a diminuição na incidência de bugs. Consequentemente há uma queda na quantidade de esforço gasto na manutenção, um benefício econômico para empresa, além de melhorar a percepção do cliente com um sistema estável.
+As melhores práticas de engenharia e design de código defendem a utilização dos princípios SOLID, sendo inversão de dependência um destes princípios.
 
+A grande maioria dos frameworks modernos oferecem um mecanismo de IoC de forma nativa. O uso de IoC já não é mais uma espécie de "luxo" que você adiciona ao código. É uma obrigação, afinal é a única maneira de garantir baixo acoplamento, testabilidade e manutenibilidade.
 
 ## Cenário
 
-A seguir o consumidor, domínio, necessita da classe repositório.
+Neste case temos uma classe de domínio que necessita da classe repositório.
 
 ![dependencia](https://www.brunobrito.net.br/content/images/2018/05/dependencia1-2.PNG)
 
-Aparentemente não há problemas neste desenho, mas há uma reflexão, o domínio precisa da classe repositório?
+Aparentemente não há problemas neste desenho, mas há uma reflexão:
 
-O domínio precisa salvar no banco (O que deve ser feito). É desnecessário o conhecimento dos métodos, implementação e as demais propriedades da classe repositório (como deve ser feito).
+O domínio precisa da classe repositório ou apenas da funcionalidade que ela oferece?
 
-Para resolver é necessário abstrair a definição do método “Salvar” do repositório em uma interface, ilustrado abaixo. 
+O domínio precisa salvar no banco (*o que deve ser feito*), porém é desnecessário saber como instanciar a classe de repositório, o funcionamento dos métodos e as demais propriedades (*como deve ser feito*).
+
+Para resolver é necessário abstrair as funcionalidades (definições dos métodos) do repositório em uma interface:
 
 ![dependencia-invertendo](https://www.brunobrito.net.br/content/images/2018/05/dependencia-invertendo-2.PNG)
 
-Na ilustração acima o serviço de repositório implementa a interface e o domínio usa uma instância da interface. O domínio continua utilizando o serviço de repositório. No entanto o domínio não sabe quem tem esse conhecimento. No exemplo foi utilizado uma classe chamada PedidoRepositorySql, mas que pode ser facilmente substituído por uma biblioteca Oracle ou MySql. Desde que mantenha a assinatura da interface.
+Na ilustração acima o repositório implementa uma interface e o domínio faz uso desta interface. O domínio continua utilizando as funcionalidades do repositório, entretanto o domínio não possui o conhecimento de como esse repositório funciona.
 
-### Beneficios
+A interface (também conhecida como contrato) define o que o repositório deve ter de comportamento e isto é tudo que a classe de domínio precisa saber.
 
-O domínio tornou-se independente do PedidoRepositorySql. Portanto é menos provável que haja a necessidade de fazer alterações no domínio quando houver alterações no PedidoRepositorySql. No formato que foi concebido é improvável que uma modificação no domínio implique em implementações no Repository.
+No exemplo foi utilizado uma classe chamada PedidoRepositorySql, mas que pode ser facilmente substituída por uma classe Oracle ou MySql desde que mantenha a implementação da mesma interface.
 
-Outro benefício é que o código do domínio está isolado do servico de banco de dado, facilitando a criação de testes unitários. Na primeira abordagem para criar um teste seria necessário também configurar o banco de dados.
+## Benefícios
 
-### Da teoria à prática
+O domínio tornou-se independente da implementação do repositório.
 
-Seguindo o cenário anterior, será criado uma classe de domínio que precisa enviar e-mail e salvar no banco.
+Assim se a classe PedidoRepositorySql mudar por algum motivo o domínio não precisa ser alterado. O domínio só seria impactado caso a interface (contrato) mudasse.
 
-O código será refatorado passo a passo. Até chegar na inversão de dependência.
+O termo contrato cabe muito bem aqui. É uma garantia de que tudo que está explicitamente definido na interface está definido na classe.
 
-#### 1. Código espaguete
-<pre><code data-language="java">
-    public class PedidosService
+Falando de SOLID, podemos entender que o DIP (*Dependency Inversion Principle*) é uma maneira de aplicar o SRP (*Single Responsibility Principle*), pois agora a classe de domínio não tem mais a responsabilidade de saber como a classe de repositório funciona.
+
+## Da teoria à prática
+
+Neste cenário criaremos uma classe de domínio que precisa enviar e-mail e salvar no banco.
+
+O código será feito com alto acoplamento e será refatorado até chegar na injeção de dependência (DI).
+
+### 1. Código espaguete
+
+```csharp
+public class PedidosService
+{
+    public void AnalisarPedido(Pedido pedido)
     {
-        public void AnalisarPedido(Pedido pedido)
+        if (pedido.Total > 10m)
         {
-            if (pedido.Total > 10m)
-            {
-                pedido.Suspeito();
-                this.EnviarEmailAlerta(pedido);
-            }
-
-            new PedidoRepositorySql().SalvarPedido(pedido);
+            pedido.Suspeito();
+            this.EnviarEmailAlerta(pedido);
         }
 
-        private void EnviarEmailAlerta(Pedido pedido)
+        new PedidoRepositorySql().SalvarPedido(pedido);
+    }
+
+    private void EnviarEmailAlerta(Pedido pedido)
+    {
+        // Codigo para enviar e-mail
+    }
+}
+```
+
+Seguindo o SRP do SOLID, o envio de e-mail deveria ser responsabilidade de outra classe. Por se tratar de uma dependência de infraestrutura deveria inclusive ser implementada em uma camada diferente da do domínio.
+
+### 2. Aplicando a IoC
+
+Repare que no código abaixo o PedidoService desconhece implementar as classes de repositório e de serviço de e-mail. 
+
+A única informação que possui são os contratos que expõem métodos para atender estas necessidades.
+
+```csharp
+public class PedidosService
+{
+    private readonly IPedidoRepository _pedidoRepository;
+    private readonly IEmailService _emailService;
+
+    public PedidosService(
+        IPedidoRepository pedidoRepository,
+        IEmailService emailService)
+    {
+        _pedidoRepository = pedidoRepository;
+        _emailService = emailService;
+    }
+
+    public void AnalisarPedido(Pedido pedido)
+    {
+        if (pedido.Total > 10m)
         {
-            // Codigo para enviar e-mail
+            pedido.Suspeito();
+            _emailService.EnviarEmailAlerta(pedido);
         }
+
+        _pedidoRepository.SalvarPedido(pedido);
     }
-</code></pre>
+}
+```
 
-Pelo princípio do SOLID, o envio de e-mail deveria ser responsabilidade de outra classe.  Respeitando  também os padrões do DDD, o envio de e-mail e o Repositório deveriam estar em outra camada (projeto).
+Para que tudo funcione será necessário criar as classes que implementem as interfaces.
 
-#### 2. Aplicando a IoC.
+```csharp
+public interface IEmailService
+{
+    void EnviarEmailAlerta(Pedido pedido);
+}
 
-Repare que no código abaixo o PedidoService desconhece como criar o repositório, desconhece como enviar e-mail, apenas sabe que deve fazê-lo, mas não sabe como e tampouco detalhes da implementação.
+public interface IPedidoRepository
+{
+    void SalvarPedido(Pedido pedido);
+}
 
-<pre><code data-language="java">
-    public class PedidosService
+public class PedidoRepositorySql : IPedidoRepository
+{
+    public void SalvarPedido(Pedido pedido) { }
+}
+
+public  class  EmailGoogleService: IEmailService
+{
+    public void EnviarEmailAlerta(Pedido pedido) { }
+}    
+```
+
+As implementações dos códigos acima poderiam estar em outra camada, em outro projeto ou até mesmo numa referência de um pacote Nuget.
+
+### Flexibilidade
+
+Com a técnica do IoC o PedidoService torna-se independente, afinal não conhece os detalhes dos serviços que utiliza.
+
+Inclusive abrindo cenário para novas possibilidades, por exemplo:
+
+```csharp
+// repositorio Sql, email do Google
+var pedidoService = new PedidosService(new PedidoRepositorySql(), new EmailGoogleService());
+
+// repositorio oracle, email do Google 
+var pedidoService = new PedidosService(new PedidoRepositoryOracle(), new EmailGoogleService());
+
+// repositorio MySql, email do Google
+var pedidoService = new PedidosService(new PedidoRepositoryMySql(), new EmailGoogleService());
+
+// repositorio Mongo, e-mail MailChimp
+var pedidoService = new PedidosService(new PedidoRepositoryMongoDb(), new MailChimpService());
+```
+
+Basta que estas novas classes implementem as mesmas interfaces.
+
+Como num passe de mágica tudo continua funcionando! Sem a necessidade de alterações no serviço de domínio.
+
+### Injeção de dependência e Resolução de dependência
+
+No código acima foram criadas as instâncias das classes diretamente nos parâmetros, porém o certo seria fazer o uso das interfaces.
+
+O mecanismo que oferece as instâncias de classes que implementam as interfaces é chamado de mecanismo de DI. Ou seja, ao injetar uma interface no construtor de uma classe você estará dizendo a este mecanismo.
+
+-Hey, me dê uma instância da classe que implementa esse contrato aqui!
+
+Sendo assim conforme o código abaixo, ao obter uma instância da classe PedidosService você também já terá uma instância da classe de repositório e de serviço de e-mail disponibilizadas através das propriedades que implementam os seus contratos.
+
+```csharp
+public class PedidosService
+{
+    private readonly IPedidoRepository _pedidoRepository;
+    private readonly IEmailService _emailService;
+
+    public PedidosService(
+        IPedidoRepository pedidoRepository,
+        IEmailService emailService)
     {
-        private readonly IPedidoRepository _pedidoRepository;
-        private readonly IEmailService _emailService;
+        _pedidoRepository = pedidoRepository;
+        _emailService = emailService;
+    }
 
-        public PedidosService(
-            IPedidoRepository pedidoRepository,
-            IEmailService emailService)
+    public void AnalisarPedido(Pedido pedido)
+    {
+        if (pedido.Total > 10m)
         {
-            _pedidoRepository = pedidoRepository;
-            _emailService = emailService;
+            pedido.Suspeito();
+            _emailService.EnviarEmailAlerta(pedido);
         }
 
-        public void AnalisarPedido(Pedido pedido)
-        {
-            if (pedido.Total > 10m)
-            {
-                pedido.Suspeito();
-                _emailService.EnviarEmailAlerta(pedido);
-            }
-
-            _pedidoRepository.SalvarPedido(pedido);
-        }
+        _pedidoRepository.SalvarPedido(pedido);
     }
-</code></pre>
+}
+```
 
-Para que funcione será necessário criar classes que implemente as interfaces.
+Essa é a mágica da Injeção de Dependência!
 
-<pre><code data-language="java">
-    public interface IEmailService
-    {
-        void EnviarEmailAlerta(Pedido pedido);
-    }
-
-    public interface IPedidoRepository
-    {
-        void SalvarPedido(Pedido pedido);
-    }
-
-    public class PedidoRepositorySql : IPedidoRepository
-    {
-        public void SalvarPedido(Pedido pedido) { }
-    }
-
-    public  class  EmailGoogleService: IEmailService
-    {
-        public void EnviarEmailAlerta(Pedido pedido) { }
-    }
-    
-</code></pre>
-
-As implementações dos códigos acima poderia estar em outra classe, em outro projeto ou até mesmo numa referência do nuget
-
-#### Flexibilidade
-
-Com este padrão, o PedidoService é independente, não conhece os detalhes dos serviços que utiliza. Torna-se flexível, abrindo o cenário para novas possibilidades, abaixo algumas delas.
-
-<pre><code data-language="java">
-    // repositorio Sql, email do Google
-    var pedidoService = new PedidosService(new PedidoRepositorySql(), new EmailGoogleService());
-</code></pre>
-
-<pre><code data-language="java">
-    // repositorio oracle, email do Google 
-    var pedidoService = new PedidosService(new PedidoRepositoryOracle(), new EmailGoogleService());
-</code></pre>
-
-<pre><code data-language="java">
-    // repositorio MySql, email do Google
-    var pedidoService = new PedidosService(new PedidoRepositoryMySql(), new EmailGoogleService());
-</code></pre>
-
-<pre><code data-language="java">
-    // repositorio Mongo, e-mail chimp
-    var pedidoService = new PedidosService(new PedidoRepositoryMongoDb(), new MaailChimpService());
-</code></pre>
-
-Basta as classes implementarem a interface. E como um passe de mágica, um comportamento totalmente novo. Sem a necessidade de nenhuma alteração no serviço.
+Cada framework possui o seu mecanismo de resolução de dependências. Não é tão simples, tem alguns detalhes muito importantes mas isto já é assunto para um outro artigo.
