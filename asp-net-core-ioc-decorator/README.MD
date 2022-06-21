@@ -41,7 +41,7 @@ Imagine que a implementação do `ICarStore` esteja num componente fora do seu a
 
 ## A técnica
 
-A técnica consiste em utilizar o IoC. A estratégia é composta por duas etapas. 
+A técnica consiste em utilizar o pattern DECORATOR. A estratégia é composta por duas etapas. 
 
 A primeira é criar uma classe de cache que receba o `ICarStore` e também faça a implementação da interface.
 
