@@ -1,4 +1,4 @@
-Sabia que é possivel sobescrever as configurações do appsettings.json da sua aplicação? Existem pegadinhas que podem te deixar de cabelo em pé! Veja nesse post algumas dicas!
+## Sabia que é possível sobrescrever as configurações do appsettings.json da sua aplicação? Existem pegadinhas que podem te deixar de cabelo em pé! Veja nesse post algumas dicas!
 
 ![options](https://user-images.githubusercontent.com/7241156/182509843-b2c7d720-e200-4993-8174-3bfe41158bae.png)
 
@@ -54,7 +54,7 @@ A variável `env.EnvironmentName` vai conter o valor que foi setado na Environme
 
 ![Windows](https://user-images.githubusercontent.com/7241156/182509893-d7aa687a-3021-4cd1-b123-b4d877a0f8bc.png)
 
-Se essa váriavel tiver o valor `Development`. Então vai carregar o <span class="txt-color-yellow">User Secrets</span>. Por fim carrega as configurações que podem ser passados na inicialização do projeto.
+Se essa variável tiver o valor `Development`. Então vai carregar o <span class="txt-color-yellow">User Secrets</span>. Por fim carrega as configurações que podem ser passados na inicialização do projeto.
 
 ![camadas](https://user-images.githubusercontent.com/7241156/182509914-3a1857de-a9ef-4146-ade4-b90d4eab345f.png)
 
@@ -68,48 +68,48 @@ O AppSettings é construido em Layers. Geralmente segue esta sequencia, pois é 
 4. Váriaveis de ambiente
 5. Váriaveis dos argumentos passados na inicialização via linha de comando.
 
-A ordem pode ser alterado, de acordo com a necessidade do desenvolvedor e projeto. Porém alterar essa ordem não é procedimento comum.
+A ordem pode ser alterada, de acordo com a necessidade do desenvolvedor e projeto. Porém alterar essa ordem não é procedimento comum.
 
 ## Niveis 
 
-O AppSettings é criado de forma hierárquica. Conforme as camadas são adicionadas, eventualmente, pode sobescrever as chaves da camada atual.
+O AppSettings é criado de forma hierárquica. Conforme as camadas são adicionadas, eventualmente, pode sobrescrever as chaves da camada atual.
 
 ![Appsettings](https://user-images.githubusercontent.com/7241156/182510219-546a7ef9-37a7-47f5-bcdf-b5f141b7b398.gif)
 
-Dessa forma seu aplicativo pode ter uma configuração diferente para cada ambiente. É possivel explorar as diversas configurações para cada um dos ambientes em que a app é executada.
+Dessa forma seu aplicativo pode ter uma configuração diferente para cada ambiente. É possível explorar as diversas configurações para cada um dos ambientes em que a app é executada.
 
 ## User Secrets
 
-O User Secrets permite guardar informações sensíveis sem a necessidade de colocar no projeto. Dessa forma o arquivo fica fora do controle de versões. Apenas na maquina do desenvolvedor.
+O User Secrets permite guardar informações sensíveis sem a necessidade de colocar no projeto. Dessa forma o arquivo fica fora do controle de versões. Apenas na máquina do desenvolvedor.
 
 ### Configurando o User Secrets
 
-Se você estiver usando o Visual Studio para adicionar o User Secrets basta clicar com o botão direito do mouse no projeto e selecionar a opçãos Manage User Secrets.
+Se você estiver usando o Visual Studio para adicionar o User Secrets basta clicar com o botão direito do mouse no projeto e selecionar a opção Manage User Secrets.
 
 ![image](https://user-images.githubusercontent.com/7241156/182510243-38bc4832-4532-4c3c-889a-e183b1153ccd.png)
 
 
-O arquivo será salvo na máquina local. O caminho será  `%USERPROFILE%\AppData\Roaming\Microsoft\UserSecrets\`. Além disso será adicionado uma chave no arquivo csproj.
+O arquivo será salvo na máquina local. O caminho será  `%USERPROFILE%\AppData\Roaming\Microsoft\UserSecrets\`. Além disso, será adicionado uma chave no arquivo csproj.
 
 ![image](https://user-images.githubusercontent.com/7241156/182510265-c64ea434-035e-4d17-87bc-26590b2ce565.png)
 
 
 ## Pode ser utilizado por vários projetos
 
-Como é um arquivo local, você pode reaproveitar o User Secrets em outros projetos. Para isso basta adicionar a mesma chave `<UserSecretsId>id</UserSecretsId>` no **csproj**.
+Como é um arquivo local, você pode aproveitar o User Secrets em outros projetos. Para isso basta adicionar a mesma chave `<UserSecretsId>id</UserSecretsId>` no **csproj**.
 
 
-# Váriaveis de ambiente
+# Variáveis de ambiente
 
 O ASP.NET Core usa uma variável de ambiente chamada `ASPNETCORE_ENVIRONMENT` para indicar o ambiente. O valor pode ser qualquer coisa. Por default seu valor é Development, Staging ou Production. 
 
 **O valor não diferencia maiúsculas de minúsculas no Windows e Mac OS, mas diferencia maiúsculas de minúsculas no Linux.** E isso pode gerar um baita mal estar. Então tome cuidado.
 
-Dentro do Visual Studio, é possivel alterar o valor das variáveis de ambiente. Em propriedado do projeto > Debug.
+Dentro do Visual Studio, é possível alterar o valor das variáveis de ambiente. Em propriedades do projeto > Debug.
 
 ![DebugSection](https://user-images.githubusercontent.com/7241156/182510376-d674a368-a933-4aa4-ad3e-73434665228e.png)
 
-Além disso a Váriavel de Ambiente **substitui** as configurações do `appSettings.json`. ISSO mesmo!
+Além disso a variável de Ambiente **substitui** as configurações do `appSettings.json`. ISSO mesmo!
 
 Suponha que você tem o seguinte `appSettings.config`:
 
@@ -119,7 +119,7 @@ Suponha que você tem o seguinte `appSettings.config`:
 }
 ```
 
-Para sobescrever essa configuração é necessário adicionar uma váriavel de ambiente:
+Para sobrescrever essa configuração é necessário adicionar uma variável de ambiente:
 
 ![image](https://user-images.githubusercontent.com/7241156/182510651-f81891da-5b96-438e-9033-fa0556da0c37.png)
 
@@ -127,13 +127,13 @@ Após adicionar ela vai aparecer na lista
 
 ![image](https://user-images.githubusercontent.com/7241156/182510664-0c2a522b-c279-41ef-86e7-30b7a6842966.png)
 
-Assim quando sua aplicação carregar, a variável de ambiente vai substituir a váriavel que está no `appSettings.json`.
+Assim, quando sua aplicação carregar, a variável de ambiente vai substituir a variável que está no `appSettings.json`.
 
 Se você vem de uma stack Microsoft, inicialmente essa configuração pode parecer estranho. Mas essa possibilidade é extremamente útil em ambientes de Cloud, em containers, kubernetes.
 
 ## Docker
 
-É possivel setar as váriaveis de ambiente através do DOCKERFILE ou no Compose.
+É possível setar as variáveis de ambiente através do DOCKERFILE ou no Compose.
 
 Dockerfile:
 
@@ -156,13 +156,13 @@ environment:
 
 ## Azure AppService
 
-Para modificar as váriaveis vá em App Services > Seu App Service > Configuration.
+Para modificar as variáveis vá em App Services > Seu App Service > Configuration.
 
 ![image](https://user-images.githubusercontent.com/7241156/182510968-c4ad5931-46a3-4018-84e9-cf55682f8b16.png)
 
-## Alterando os subniveis
+## Alterando os subníveis
 
-É normal que o `appSettings.json` sejam mais complexos do que apenas o primeiro nível como foi demonstrado nesses exemplos.
+É normal que o `appSettings.json` seja mais complexo. Contendo mais níveis JSON do que apenas o primeiro nível. Como foi demonstrado nesses exemplos.
 
 Considere a seguinte configuração.
 
@@ -178,7 +178,7 @@ Considere a seguinte configuração.
 }
 ```
 
-Como fazer para laterar a chave **3rdLevel**? A resposta depende de qual ambiente a aplicação está rodando.
+Como fazer para alterar a chave **3rdLevel**? A resposta depende de qual ambiente a aplicação está rodando.
 
 ## Docker
 
@@ -226,9 +226,9 @@ Já para máquinas linux, a configuração não aceita **:** (dois pontos) Por i
 
 ## Bonus
 
-Sabia que é possivel consultar todas as váriaveis de ambiente do **Azure AppService** ?. Algumas vezes as configuração não funcionam. Parecem estar com bug. Essa dica pode ser útil para aqueles que estão tentando debugar.
+Sabia que é possível consultar todas as variáveis de ambiente do **Azure AppService** ?. Algumas vezes as configurações não funcionam. Parecem estar com bug. Essa dica pode ser útil para aqueles que estão tentando debugar.
 
-É possivel visualizar todas as váriaveis de ambiente de um AppService. Para isso abra o Kudu:
+É possível visualizar todas as variáveis de ambiente de um AppService. Para isso abra o Kudu:
 
 AppService > Seu App Service > Advanced Tools > Go
 
