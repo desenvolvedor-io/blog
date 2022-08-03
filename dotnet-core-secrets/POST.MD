@@ -1,4 +1,4 @@
-## .NET Core - Sobrescrevendo seu appsettings
+## .NET Core - Sobrescrevendo o appsettings.json
 
 Sabia que é possivel sobescrever as configurações do appsettings.json da sua aplicação? Existem pegadinhas que podem te deixar de cabelo em pé! Veja nesse post algumas dicas!
 
