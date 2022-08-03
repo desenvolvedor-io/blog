@@ -1,4 +1,4 @@
-## Sabia que é possível sobrescrever as configurações do appsettings.json da sua aplicação? Existem pegadinhas que podem te deixar de cabelo em pé! Veja nesse post algumas dicas!
+## Sabia que é possível sobrescrever as configurações do appsettings.json da sua aplicação? Existem algumas pegadinhas que podem te deixar de cabelo em pé! Veja nesse post algumas dicas!
 
 ![options](https://user-images.githubusercontent.com/7241156/182509843-b2c7d720-e200-4993-8174-3bfe41158bae.png)
 
@@ -10,9 +10,9 @@ Era um XML com diversas configurações da tua aplicação. O .NET Core foi rees
 
 Ao criar um site ASP.NET Core é criado um arquivo chamado appsettings.json.
 
-O appsettings.json substitui as configurações localizadas anteriormente no web.config. O .NET Core suporta arquivos JSON, XML e ini. 
+O appsettings.json substitui as configurações localizadas anteriormente no web.config. O .NET Core suporta arquivos JSON, XML e ini.
 
-Nas primeiras versões do ASP.NET Core a configuração era feita no arquivo **Startup.cs**. A partir da versão 6 a configuração está imbutida no método `WebApplication.CreateBuilder(args);` no **Progam.cs**
+Nas primeiras versões do ASP.NET Core a configuração era feita no arquivo **Startup.cs**. A partir da versão 6 a configuração está embutida no método `WebApplication.CreateBuilder(args);` no **Progam.cs**
 
 ```csharp
 var builder = WebApplication.CreateBuilder(args);
@@ -54,7 +54,7 @@ A variável `env.EnvironmentName` vai conter o valor que foi setado na Environme
 
 ![Windows](https://user-images.githubusercontent.com/7241156/182509893-d7aa687a-3021-4cd1-b123-b4d877a0f8bc.png)
 
-Se essa variável tiver o valor `Development`. Então vai carregar o <span class="txt-color-yellow">User Secrets</span>. Por fim carrega as configurações que podem ser passados na inicialização do projeto.
+Se essa variável possuir o valor `Development`. Então vai carregar o <span class="txt-color-yellow">User Secrets</span>. Por fim carrega as configurações que podem ser passados na inicialização do projeto.
 
 ![camadas](https://user-images.githubusercontent.com/7241156/182509914-3a1857de-a9ef-4146-ade4-b90d4eab345f.png)
 
@@ -70,7 +70,7 @@ O AppSettings é construido em Layers. Geralmente segue esta sequencia, pois é 
 
 A ordem pode ser alterada, de acordo com a necessidade do desenvolvedor e projeto. Porém alterar essa ordem não é procedimento comum.
 
-## Niveis 
+## Niveis
 
 O AppSettings é criado de forma hierárquica. Conforme as camadas são adicionadas, eventualmente, pode sobrescrever as chaves da camada atual.
 
@@ -162,7 +162,7 @@ Para modificar as variáveis vá em App Services > Seu App Service > Configurati
 
 ## Alterando os subníveis
 
-É normal que o `appSettings.json` seja mais complexo. Contendo mais níveis JSON do que apenas o primeiro nível. Como foi demonstrado nesses exemplos.
+É normal que o `appSettings.json` seja mais complexo com mais níveis JSON do que apenas o primeiro nível. Como foi demonstrado nesses exemplos.
 
 Considere a seguinte configuração.
 
@@ -226,7 +226,7 @@ Já para máquinas linux, a configuração não aceita **:** (dois pontos) Por i
 
 ## Bonus
 
-Sabia que é possível consultar todas as variáveis de ambiente do **Azure AppService** ?. Algumas vezes as configurações não funcionam. Parecem estar com bug. Essa dica pode ser útil para aqueles que estão tentando debugar.
+Sabia que é possível consultar todas as variáveis de ambiente do **Azure AppService** ? Algumas vezes as configurações não funcionam. Parecem estar com bug. Essa dica pode ser útil para aqueles que estão tentando debugar.
 
 É possível visualizar todas as variáveis de ambiente de um AppService. Para isso abra o Kudu:
 
