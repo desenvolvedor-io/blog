@@ -31,7 +31,7 @@ Aliás... Já adiciona no seu leitor de RSS o nosso feed: https://desenvolvedor.
 
 Iremos abordar uma infinidade de temas aqui, de conteúdo técnico até os demais como carreira, anúncios, receitas favoritas do Eduardo (vai que...)
 
-Então desde já se você tiver uma sugestão de assunto via lá no GitHub e [manda uma Issue para gente](https://github.com/desenvolvedor-io/blog/issues) ou se você não é muito intimo do GitHub não tem problema! Você pode falar com a gente via [Discord](https://desenvolvedor.io/discord) ou por qualquer outro meio de contato (dê uma olhada no rodapé do site).
+Então desde já se você tiver uma sugestão de assunto vai lá no GitHub e [manda uma Issue para gente](https://github.com/desenvolvedor-io/blog/issues) ou se você não é muito intimo do GitHub não tem problema! Você pode falar com a gente via [Discord](https://desenvolvedor.io/discord) ou por qualquer outro meio de contato (dê uma olhada no rodapé do site).
 
 ## Vamos fazer um trato?
 
