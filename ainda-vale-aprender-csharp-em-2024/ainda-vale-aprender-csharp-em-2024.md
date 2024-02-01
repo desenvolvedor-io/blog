@@ -8,7 +8,8 @@ Além disso, trata-se da principal linguagem da plataforma .NET.
 
 O C# destaca-se pela sua adaptação às demandas emergentes, como a necessidade de criar aplicações multiplataforma de maneira eficiente e escalável.
  
-![image](https://github.com/team-desenvolvedor-io/erick-vendramel/assets/5068797/22ae8bd2-de20-4ee3-8e78-8804f651a8ae)
+![1](https://github.com/desenvolvedor-io/blog/assets/35066545/af79387a-294c-4f47-9177-5ad88cc070db)
+
 
 A versatilidade do C# permite aos desenvolvedores criar aplicações para diversos dispositivos e sistemas operacionais, incluindo web, desktop, mobile, IA e IoT.
 
@@ -24,7 +25,8 @@ Além disso, a natureza pragmática do C# em lidar com abstrações complexas de
 ## 3 - Comunidade ativa e suporte da indústria: 
 A Microsoft e a comunidade .NET oferecem uma ampla gama de recursos educacionais e suporte, incluindo tutoriais online, documentação abrangente e eventos presenciais e virtuais. Isso garante que os desenvolvedores tenham acesso a orientações e soluções para resolver problemas específicos durante o desenvolvimento de seus projetos.
 
-![image-1](https://github.com/team-desenvolvedor-io/erick-vendramel/assets/35066545/aab6dcfe-5189-41b6-b9ce-e34f44a31766)
+![2](https://github.com/desenvolvedor-io/blog/assets/35066545/50d5ec95-4638-4aa8-bcf3-ef53e6cd3c57)
+
 
 
 A comunidade .NET mantém fóruns de discussão ativos onde os desenvolvedores podem fazer perguntas, compartilhar conhecimentos e colaborar em projetos de código aberto relacionados ao C#, promovendo um ambiente de aprendizado contínuo e troca de experiências.
@@ -37,7 +39,7 @@ O desenvolvimento de aplicações em C# abre portas para oportunidades tradicion
 
 Isso não só expande as perspectivas de carreira dos desenvolvedores, mas também permite explorar novos campos dentro da indústria de tecnologia.
  
-![image](https://github.com/team-desenvolvedor-io/erick-vendramel/assets/5068797/67755788-a1c9-4691-b93c-fbeee2bd9a5a)
+![3](https://github.com/desenvolvedor-io/blog/assets/35066545/cf4de122-88ba-4dad-bfea-5eff55f02d55)
 
 Com o C# os desenvolvedores podem criar aplicativos multiplataforma de forma eficiente utilizando o .NET MAUI e também aplicar seus conhecimentos em IA para desenvolver modelos de machine learning poderosos com o ML.NET. 
 
@@ -50,7 +52,7 @@ Mais do que apenas um conjunto de recursos, o C# reflete o poder dinâmico de um
 
 Essa abordagem colaborativa amplia as possibilidades de inovação e adaptação às necessidades da comunidade de desenvolvedores.
 
-![image-15](https://github.com/team-desenvolvedor-io/erick-vendramel/assets/35066545/d7ff9b8f-a1d9-4bb7-94d4-d5c5950ba313)
+![4](https://github.com/desenvolvedor-io/blog/assets/35066545/35341474-d7af-4871-b78b-9ea6392b0f12)
 
 
 Ao utilizar o C#, os desenvolvedores têm acesso a uma ampla gama de recursos que oferecem mais poder e maior flexibilidade no desenvolvimento de aplicações.
@@ -62,7 +64,7 @@ Em ambientes onde as aplicações frequentemente ultrapassam uma década de vida
 
 A compatibilidade entre versões garante que as habilidades adquiridas sejam transferíveis e duradouras, proporcionando consistência no desenvolvimento e reduzindo a necessidade de reestruturações frequentes do código.
 
-![image](https://github.com/team-desenvolvedor-io/erick-vendramel/assets/5068797/efe81e5b-d18a-45e4-a40e-7e15648dc2e2)
+![5](https://github.com/desenvolvedor-io/blog/assets/35066545/70a59742-3540-48c5-bbb9-b89f8e78a452)
   
 A possibilidade de migrar gradualmente as aplicações entre diferentes versões do .NET é um aspecto fundamental. Isso permite que os desenvolvedores aproveitem os recursos e melhorias mais recentes sem interromper o funcionamento existente da aplicação, garantindo assim sua adaptabilidade às demandas em constante evolução do mercado.
 
@@ -71,11 +73,11 @@ A alta demanda por desenvolvedores C# continua a impulsionar salários competiti
 
 A natureza transferível das habilidades em C# entre diferentes setores e empresas oferece estabilidade profissional aos desenvolvedores, mesmo em um mercado de trabalho dinâmico com outras tecnologias.
 
-![image](https://github.com/team-desenvolvedor-io/erick-vendramel/assets/5068797/8c88e84e-24c0-49d3-8a72-81e270e6c426)
+![6](https://github.com/desenvolvedor-io/blog/assets/35066545/0128ff69-812d-4873-8bbd-7efa06368ff8)
 
 [Fonte Glassdoor](https://www.glassdoor.com.br/Sal%C3%A1rios/desenvolvedor-c-senior-sal%C3%A1rio-SRCH_KO0,22.htm)
 
-![image](https://github.com/team-desenvolvedor-io/erick-vendramel/assets/5068797/eccca07c-27a6-4835-b9a2-82ca2d924cc4)
+![7](https://github.com/desenvolvedor-io/blog/assets/35066545/778fdb72-a5eb-4a99-b950-a3584433ebcf)
 
 [Fonte Salary](https://www.salary.com/research/salary/posting/senior-net-developer-salary)
 
@@ -86,7 +88,7 @@ O amplo conjunto de ferramentas e recursos disponíveis para desenvolvedores C#,
 
 Isso permite que os desenvolvedores foquem em resolver problemas complexos e entreguem soluções de alta qualidade de maneira eficiente, o Visual Studio oferece uma ampla gama de recursos integrados, como depuração avançada, refatoração de código, controle de versão e suporte a várias linguagens, que ajudam os desenvolvedores a escrever, testar e implantar codigos C# com eficiência e precisão.
  
- ![image-10](https://github.com/team-desenvolvedor-io/erick-vendramel/assets/35066545/285e9edb-6a4a-4999-ac57-b9745d2cb5a6)
+ ![8](https://github.com/desenvolvedor-io/blog/assets/35066545/27fd955e-3be1-4e2a-abb3-76272348fb41)
 
 Aqui vale ressaltar um grande destaque ao Visual Studio Code por sua versatilidade e capacidade de operar em qualquer sistema operacional e oferecer a mesma capacidade que o Visual Studio tradicional oferece. 
 
@@ -95,7 +97,7 @@ Desenvolvedores de diversas plataformas e tecnologias utilizam o VS Code como ID
 ## 9 - Inovação e adoção de novas tecnologias:
 A Microsoft continua a investir em novas tecnologias como o Blazor, para expandir as capacidades do C# e do .NET, proporcionando aos desenvolvedores novas oportunidades para explorar e inovar em seus projetos. Isso mantém o C# relevante e competitivo em um cenário tecnológico de constante evolução.
 
-![image](https://github.com/team-desenvolvedor-io/erick-vendramel/assets/5068797/db968040-8e15-4486-9685-8ec1a3a5de54)
+![9](https://github.com/desenvolvedor-io/blog/assets/35066545/c2306e23-c2bc-443d-b1e4-94e6dc982077)
 
 O Blazor é uma estrutura de desenvolvimento da web baseada em ASP.NET que permite aos desenvolvedores criarem aplicações SPA de forma interativa e rica em recursos utilizando C# e .NET. 
 
@@ -106,7 +108,7 @@ O domínio do C# não apenas abre portas para uma ampla gama de oportunidades de
 
 Isso é impulsionado pela demanda contínua por habilidades em C# em diversos setores e empresas.
 
-![image-7](https://github.com/team-desenvolvedor-io/erick-vendramel/assets/35066545/7b811896-9377-4217-8c7b-664cfee7a8f0)
+![10](https://github.com/desenvolvedor-io/blog/assets/35066545/6efd4ac6-50d6-4364-9eac-aa1a35ca2b1a)
 
 Um desenvolvedor C# pode progredir em sua carreira assumindo papéis como tech lead, arquiteto de software ou até mesmo um cargo C-Level como CTO. Onde suas habilidades e sua compreensão do ecossistema de aplicações modernas são valorizadas para liderar equipes e projetos de desenvolvimento de aplicações de grande escala.
 
@@ -115,7 +117,7 @@ O C# e o ecossistema .NET incentivam ativamente a contribuição para projetos d
 
 Essa abertura permite que os desenvolvedores contribuam para projetos significativos, compartilhem conhecimentos e promovam melhores práticas de desenvolvimento de aplicações dentro da comunidade C#.
  
-![image-5](https://github.com/team-desenvolvedor-io/erick-vendramel/assets/35066545/ca3f34f0-8a71-4e18-b125-648860cc661b)
+![11](https://github.com/desenvolvedor-io/blog/assets/35066545/cab23d6a-878a-4b77-9920-781d57df2e44)
 
 Um desenvolvedor C# pode contribuir para projetos de código aberto relacionados ao .NET, como bibliotecas, frameworks ou ferramentas, fornecendo correções de bugs, novos recursos ou documentação aprimorada. 
 
@@ -163,7 +165,7 @@ Por exemplo, em 2022, a diferença de popularidade entre as linguagens era de 3,
 
 `Gráfico StackOverFlow - 2022`
 
-![image-21](https://github.com/team-desenvolvedor-io/erick-vendramel/assets/35066545/4bd1879a-90ea-40a8-86d7-5e5a525a7386)
+![12](https://github.com/desenvolvedor-io/blog/assets/35066545/5380bd32-42aa-434b-99ac-9b2f48dc2552)
 
 (Fonte: [Gráfico Stack Overflow - 2022](https://survey.stackoverflow.co/2022/#most-popular-technologies-language-prof)
 
@@ -171,7 +173,7 @@ Em apenas um ano, essa diferença diminuiu para 1,33%, indicando um crescimento 
 
 `Gráfico StackOverFlow - 2023`
 
-![image-22](https://github.com/team-desenvolvedor-io/erick-vendramel/assets/35066545/b4d559b0-9f1a-4c74-9e00-0363a837057c)
+![13](https://github.com/desenvolvedor-io/blog/assets/35066545/0b6cd101-33c1-40e4-948f-973a312149e8)
 
 (Fonte: [Gráfico Stack Overflow - 2023](https://survey.stackoverflow.co/2023/#most-popular-technologies-language)
 
