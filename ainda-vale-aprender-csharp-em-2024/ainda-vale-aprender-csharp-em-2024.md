@@ -1,7 +1,3 @@
-## Ainda vale aprender C# em 2024?
-
-Não fique na dúvida! Descubra agora se investir em C# é uma boa escolha.
-
 ## 1 - Relevância em crescimento constante:
 O C# continua sendo uma escolha muito relevante, atual e amplamente adotada pelo mercado.\
 Além disso, trata-se da principal linguagem da plataforma .NET.
