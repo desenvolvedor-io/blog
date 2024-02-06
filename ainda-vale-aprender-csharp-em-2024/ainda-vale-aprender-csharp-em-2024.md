@@ -113,7 +113,7 @@ O domínio do C# não apenas abre portas para uma ampla gama de oportunidades de
 
 Isso é impulsionado pela demanda contínua por habilidades em C# em diversos setores e empresas.
 
-![10](https://github.com/desenvolvedor-io/blog/assets/35066545/6efd4ac6-50d6-4364-9eac-aa1a35ca2b1a)
+![11](https://github.com/desenvolvedor-io/blog/assets/5068797/7d0e6f89-f5f3-48c4-8659-39bd480c1871)
 
 Um desenvolvedor C# pode progredir em sua carreira assumindo papéis como tech lead, arquiteto de software ou até mesmo um cargo C-Level como CTO. Onde suas habilidades e sua compreensão do ecossistema de aplicações modernas são valorizadas para liderar equipes e projetos de desenvolvimento de aplicações de grande escala.
 
