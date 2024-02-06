@@ -1,10 +1,11 @@
 Você ainda está na dúvida de qual linguagem focar seus estudos? Existem tantas opções, não é mesmo?\
-O C# é uma opção entre muitas desde 2002, mas então... Nos dias de hoje ainda vale a pena focar em C#?
+O C# é uma opção entre muitas desde 2002, mas... E nos dias de hoje, ainda vale a pena focar em C#?
 
-Bom eu tenho 15 motivos para te convencer que sim!
+Eu tenho 15 motivos para te convencer que sim!
 
-## 1 - É o melhor momento de todos os tempos para aprender C# e .NET
-Estamos vivendo um auge crescente desde 2016 onde o .NET se supera e muito a cada ano, atualmente eu posso dizer tranquilamente que é o melhor momento que existe para começar a estudar C# devido a maturidade, inovações, ferramentas e suporte. Nos próximos tópicos eu te explico tudo em detalhes!
+## 1 - O Auge do C# e .NET - Agora é o melhor momento para aprender
+Desde 2014, o .NET passa por uma evolução impressionante, marcada por inovações incríveis, um ecossistema de ferramentas em constante expansão e uma comunidade global extremamente colaborativa.
+Eu posso lhe dizer tranquilamente que é o melhor momento que existe para começar a estudar C# e nos próximos tópicos você entenderá tudo em detalhes!
 
 ## 2 - Relevância em crescimento constante:
 O C# continua sendo uma escolha muito relevante, atual e amplamente adotada pelo mercado.\
