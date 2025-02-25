@@ -16,7 +16,7 @@ Os três padrões abordados neste artigo são:
 
 ### O problema
 
-Você precisa criar instâncias de classes específicas, mas não quer que seu código fique preso a uma implementação específica. Imagine que você está desenvolvendo um sistema de pedidos e pode precisar de diferentes tipos de pagamento (Cartão, Boleto, Pix). Como evitar múltiplos `if`s ou `switch` para criar instâncias dessas classes?
+Você precisa criar instâncias de classes específicas, mas não quer que seu código fique preso a uma implementação específica. Imagine que você está desenvolvendo um sistema de pedidos e pode precisar de diferentes tipos de pagamento (Cartão, Boleto, Pix). Como evitar múltiplos `if` ou `switch` para criar instâncias dessas classes?
 
 ### A solução
 
