@@ -52,9 +52,13 @@ WHERE [Category] = 'Eletrônicos';
 
 Porém, se houver instâncias da entidade **Product** já carregadas na memória, seus valores continuarão inalterados, o que pode levar a inconsistências na aplicação.
 
+**OBS:** É importante saber que essa modificação ocorre dentro do contexto de uma transação, não existe risco de apenas parte dos dados serem persistidos.
+
 ## Riscos e Consistência Transacional
 
-Se um **ExecuteUpdate** for executado com sucesso, as alterações serão imediatamente persistidas no banco de dados, independentemente de outras modificações pendentes em memória. Se um erro ocorrer posteriormente ao chamar **SaveChanges()**, podemos acabar em um estado inconsistente.
+Se dentro da mesma operação existir a necessidade de outras modificações diretamente no contexto, um **SaveChanges()** será necessário.
+
+Se um **ExecuteUpdate** for executado com sucesso, as alterações serão imediatamente persistidas no banco de dados, independentemente de outras modificações pendentes em memória. Se um erro ocorrer posteriormente ao chamar **SaveChanges()** para persistir a modificação de outras operações (que devem ocorrer em conjunto), podemos acabar em um estado inconsistente.
 
 A solução é envolver ambas as operações dentro de uma transação explícita:
 
@@ -64,16 +68,30 @@ using (var transaction = context.Database.BeginTransaction())
 {
     try
     {
+        // Atualização direta no banco (não afeta o contexto do EF Core)
         context.Products
             .Where(p => p.Category == "Eletrônicos")
             .ExecuteUpdate(s => s.SetProperty(p => p.Price, p => p.Price * 1.10));
 
-        context.SaveChanges();
+        // ... Outras operações que modificam entidades do contexto.
 
+        // Aqui modificamos o contexto adicionando uma entidade
+        var log = new UpdateLog
+        {
+            Description = "Ajuste de preços em Eletrônicos",
+            Date = DateTime.UtcNow
+        };
+        context.Logs.Add(log);
+
+        // Apenas as mudanças do contexto serão transacionadas
+        context.SaveChanges(); 
+
+        // Confirma ambas as operações
         transaction.Commit();
     }
     catch (Exception ex)
     {
+        // Reverte ambas as operações se houver erro
         transaction.Rollback();
     }
 }
