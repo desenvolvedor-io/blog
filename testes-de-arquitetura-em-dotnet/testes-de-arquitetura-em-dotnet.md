@@ -199,6 +199,15 @@ Não subestime o poder de garantir sua arquitetura de forma automática e objeti
 
 ---
 
+## Veja funcionando na prática!
+
+Quer ver como tudo isso funciona de verdade?  
+Nosso projeto case, o [Equinox Project](https://github.com/EduardoPires/EquinoxProject/), traz uma implementação completa e real de testes de arquitetura utilizando o `NetArchTest.Rules`.
+
+É só clonar o repositório, rodar os testes e conferir na prática como validar sua arquitetura de forma automatizada e eficaz.
+
+---
+
 ## Conclusão
 
 O `NetArchTest.Rules` é simples, direto e poderoso. Em poucos minutos você escreve um conjunto de regras que protegerão sua arquitetura por anos. O custo de entrada é baixo, e o ganho a longo prazo é incalculável.
