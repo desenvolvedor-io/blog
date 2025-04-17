@@ -71,7 +71,7 @@ Cada contexto da aplicação deve ter sua própria **classe especialista de exte
 ```csharp
 namespace MyProject.API.Configuration
 {
-    public static class CorsServiceExtensions
+    public static class CorsConfiguration
     {
         // Configuração do Builder
         public static WebApplicationBuilder AddCustomCors(this WebApplicationBuilder builder)
@@ -98,7 +98,7 @@ namespace MyProject.API.Configuration
 ```csharp
 namespace MyProject.API.Configuration
 {
-    public static class SwaggerServiceExtensions
+    public static class SwaggerConfiguration
     {
         // Configuração do Builder
         public static WebApplicationBuilder AddSwaggerDocumentation(this WebApplicationBuilder builder)
