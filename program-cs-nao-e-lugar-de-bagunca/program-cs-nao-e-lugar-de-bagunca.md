@@ -58,12 +58,11 @@ A armadilha comum é simplesmente mover a bagunça para outro lugar, criando mé
 
 Cada contexto da aplicação deve ter sua própria **classe especialista de extensão**. Por exemplo:
 
-- `CorsServiceExtensions`
-- `SwaggerServiceExtensions`
-- `AuthenticationServiceExtensions`
-- `LoggingServiceExtensions`
-- `CorsAppBuilderExtensions`
-- `SwaggerAppBuilderExtensions`
+- `CorsConfiguration`
+- `SwaggerConfiguration`
+- `IdentityConfiguration`
+- `DependencyInjectionConfiguration`
+- `LoggingConfiguration`
 
 ## Exemplo completo e organizado de extensão
 
@@ -154,6 +153,11 @@ app.Run();
 - Use pastas com nomes claros: `Extensions` / `Configurations` / etc.
 - Cada método deve ter uma responsabilidade única
 
+## Veja na prática
+
+Quer ver como tudo isso fica implementado de verdade?
+
+Nosso projeto case, o Equinox Project, traz uma implementação completa e real de configuração da program.cs com total abstração de cada responsabilidade.
 
 ## Conclusão
 
@@ -161,6 +165,6 @@ Modularizar não é esconder a bagunça, é tratá-la com a disciplina que ela e
 
 Ao criar métodos de extensão especializados e distribuídos por contexto, você alcança o verdadeiro objetivo: manter sua aplicação ASP.NET Core limpa, testável, legível e escalável.
 
-> Desafio para você: Refatore aquele Program.cs que está virando um monstro. 
+**Desafio para você: Refatore aquele Program.cs que está virando um monstro.**
 Mas vá além dos métodos de extensão genéricos: crie classes organizadas por contexto. É aí que mora a verdadeira elegância arquitetural.
->
+
