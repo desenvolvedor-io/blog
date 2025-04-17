@@ -12,32 +12,33 @@ E o pior? Não aparece erro. Aparece **comportamento estranho**. E nada é mais 
 
 O `IServiceCollection` permite registrar dependências com três tipos principais de ciclo de vida:
 
-<table style="width:100%; border-collapse: collapse; color: #eee; background-color: #1a1a1a;">
+<table style="border-collapse: collapse; width: 100%;">
   <thead>
     <tr style="background-color: #222; color: #fff;">
-      <th style="border: 1px solid #444; padding: 8px; text-align: left;">Lifetime</th>
-      <th style="border: 1px solid #444; padding: 8px; text-align: left;">Instância criada...</th>
-      <th style="border: 1px solid #444; padding: 8px; text-align: left;">Exemplo comum</th>
+      <th style="border: 1px solid #444; padding: 6px;">Lifetime</th>
+      <th style="border: 1px solid #444; padding: 6px;">Instância criada...</th>
+      <th style="border: 1px solid #444; padding: 6px;">Exemplo comum</th>
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <td style="border: 1px solid #444; padding: 8px;">Transient</td>
-      <td style="border: 1px solid #444; padding: 8px;">Sempre que solicitado</td>
-      <td style="border: 1px solid #444; padding: 8px;">Serviços leves, stateless</td>
+    <tr style="background-color: #111; color: #eee;">
+      <td style="border: 1px solid #444; padding: 6px;">Transient</td>
+      <td style="border: 1px solid #444; padding: 6px;">Sempre que solicitado</td>
+      <td style="border: 1px solid #444; padding: 6px;">Serviços leves, stateless</td>
     </tr>
-    <tr>
-      <td style="border: 1px solid #444; padding: 8px;">Scoped</td>
-      <td style="border: 1px solid #444; padding: 8px;">Uma vez por requisição HTTP</td>
-      <td style="border: 1px solid #444; padding: 8px;">DbContext, serviço de usuário</td>
+    <tr style="background-color: #111; color: #eee;">
+      <td style="border: 1px solid #444; padding: 6px;">Scoped</td>
+      <td style="border: 1px solid #444; padding: 6px;">Uma vez por requisição HTTP</td>
+      <td style="border: 1px solid #444; padding: 6px;">DbContext, serviço de usuário</td>
     </tr>
-    <tr>
-      <td style="border: 1px solid #444; padding: 8px;">Singleton</td>
-      <td style="border: 1px solid #444; padding: 8px;">Uma única vez para toda a app</td>
-      <td style="border: 1px solid #444; padding: 8px;">Configuração, cache, logging</td>
+    <tr style="background-color: #111; color: #eee;">
+      <td style="border: 1px solid #444; padding: 6px;">Singleton</td>
+      <td style="border: 1px solid #444; padding: 6px;">Uma única vez para toda a app</td>
+      <td style="border: 1px solid #444; padding: 6px;">Configuração, cache, logging</td>
     </tr>
   </tbody>
 </table>
+
 
 
 ### Demonstração prática com Guid:
