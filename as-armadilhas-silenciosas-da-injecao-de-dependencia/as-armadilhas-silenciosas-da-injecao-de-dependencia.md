@@ -12,11 +12,33 @@ E o pior? Não aparece erro. Aparece **comportamento estranho**. E nada é mais 
 
 O `IServiceCollection` permite registrar dependências com três tipos principais de ciclo de vida:
 
-| Lifetime | Instância criada... | Exemplo comum |
-| --- | --- | --- |
-| Transient | Sempre que solicitado | Serviços leves, stateless |
-| Scoped | Uma vez por requisição HTTP | DbContext, serviço de usuário |
-| Singleton | Uma única vez para toda a app | Configuração, cache, logging |
+<table>
+  <thead>
+    <tr>
+      <th>Lifetime</th>
+      <th>Instância criada...</th>
+      <th>Exemplo comum</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Transient</td>
+      <td>Sempre que solicitado</td>
+      <td>Serviços leves, stateless</td>
+    </tr>
+    <tr>
+      <td>Scoped</td>
+      <td>Uma vez por requisição HTTP</td>
+      <td>DbContext, serviço de usuário</td>
+    </tr>
+    <tr>
+      <td>Singleton</td>
+      <td>Uma única vez para toda a app</td>
+      <td>Configuração, cache, logging</td>
+    </tr>
+  </tbody>
+</table>
+
 
 ### Demonstração prática com Guid:
 
