@@ -8,6 +8,8 @@ Todos esses problemas têm algo em comum: o desconhecimento (ou negligência) so
 
 E o pior? Não aparece erro. Aparece **comportamento estranho**. E nada é mais frustrante do que um bug que você não consegue reproduzir facilmente.
 
+---
+
 ## Tipos de ciclo de vida no ASP.NET Core
 
 O `IServiceCollection` permite registrar dependências com três tipos principais de ciclo de vida:
@@ -39,8 +41,6 @@ O `IServiceCollection` permite registrar dependências com três tipos principai
   </tbody>
 </table>
 
-
-
 ### Demonstração prática com Guid:
 
 Suponha que iremos injetar a interface `IExemploGuid` utilizando os 3 tipos de ciclo de vida e observar os resultados para cada um deles:
@@ -70,6 +70,8 @@ public class HomeController : Controller
 - Se for `AddScoped`, A e B terão o mesmo ID
 - Se for `AddSingleton`, mesmo ID para todas as requisições
 
+---
+
 ## Quando usar cada um?
 
 ### Transient
@@ -87,6 +89,8 @@ public class HomeController : Controller
 
 - Serviços **pesados de criar** e **thread-safe**
 - Ex: `ILogger<>`, `IMemoryCache`, `AppSettings`
+
+---
 
 ## Erros comuns e armadilhas
 
@@ -110,6 +114,8 @@ Use `ConcurrentDictionary`, `lock`, `Immutable*` ou evite serviços de estado co
 > 
 
 EF Core DbContext é scoped por design. Usar como singleton pode causar corrupção de dados, pois todas requisições irão ler e modificar do mesmo contexto. Já pensou que bagunça?
+
+---
 
 ## Abrindo escopos manualmente com `IServiceScopeFactory`
 
@@ -149,6 +155,8 @@ Para resolver isso corretamente, é necessário **abrir manualmente um escopo de
 - Não compartilhe serviços scoped manualmente entre threads
 - Monitore o consumo de memória
 
+---
+
 ## Testando e validando os ciclos de vida
 
 ### Testes de unidade:
@@ -160,6 +168,8 @@ Para resolver isso corretamente, é necessário **abrir manualmente um escopo de
 
 - Use `WebApplicationFactory` para validar ciclos reais entre camadas
 - Valide GUIDs, contadores ou objetos mutáveis para detectar comportamento estranho
+
+---
 
 ## Conclusão
 
