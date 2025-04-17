@@ -12,29 +12,29 @@ E o pior? Não aparece erro. Aparece **comportamento estranho**. E nada é mais 
 
 O `IServiceCollection` permite registrar dependências com três tipos principais de ciclo de vida:
 
-<table>
+<table style="width:100%; border-collapse: collapse; color: #eee; background-color: #1a1a1a;">
   <thead>
-    <tr>
-      <th>Lifetime</th>
-      <th>Instância criada...</th>
-      <th>Exemplo comum</th>
+    <tr style="background-color: #222; color: #fff;">
+      <th style="border: 1px solid #444; padding: 8px; text-align: left;">Lifetime</th>
+      <th style="border: 1px solid #444; padding: 8px; text-align: left;">Instância criada...</th>
+      <th style="border: 1px solid #444; padding: 8px; text-align: left;">Exemplo comum</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>Transient</td>
-      <td>Sempre que solicitado</td>
-      <td>Serviços leves, stateless</td>
+      <td style="border: 1px solid #444; padding: 8px;">Transient</td>
+      <td style="border: 1px solid #444; padding: 8px;">Sempre que solicitado</td>
+      <td style="border: 1px solid #444; padding: 8px;">Serviços leves, stateless</td>
     </tr>
     <tr>
-      <td>Scoped</td>
-      <td>Uma vez por requisição HTTP</td>
-      <td>DbContext, serviço de usuário</td>
+      <td style="border: 1px solid #444; padding: 8px;">Scoped</td>
+      <td style="border: 1px solid #444; padding: 8px;">Uma vez por requisição HTTP</td>
+      <td style="border: 1px solid #444; padding: 8px;">DbContext, serviço de usuário</td>
     </tr>
     <tr>
-      <td>Singletones</td>
-      <td>Uma única vez para toda a app</td>
-      <td>Configuração, cache, logging</td>
+      <td style="border: 1px solid #444; padding: 8px;">Singleton</td>
+      <td style="border: 1px solid #444; padding: 8px;">Uma única vez para toda a app</td>
+      <td style="border: 1px solid #444; padding: 8px;">Configuração, cache, logging</td>
     </tr>
   </tbody>
 </table>
