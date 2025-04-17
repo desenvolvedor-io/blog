@@ -5,6 +5,7 @@ esse arquivo é essencial para a manutenção, escalabilidade e legibilidade do 
 
 O `Program.cs` passou a assumir o papel central de configuração de uma aplicação ASP.NET Core a partir do .NET 6, com a remoção da classe `Startup`. Essa fusão trouxe benefícios em termos de simplificação e desempenho de inicialização, mas também criou um novo tipo de problema: um arquivo que cresce descontroladamente e se torna um verdadeiro Frankenstein de configurações.
 
+---
 
 ## Por que o Program.cs cresce descontroladamente?
 
@@ -17,6 +18,8 @@ Porque simplesmente tudo está sendo colocado ali: configurações de DI, CORS, 
 - **Testabilidade**: é mais fácil testar configurações isoladamente.
 - **Manutenção**: encontrar bugs ou alterar comportamentos se torna mais simples.
 - **Escalabilidade**: times podem trabalhar de forma paralela.
+
+---
 
 ## Problema comum: o Program.cs inchado
 
@@ -52,6 +55,8 @@ app.MapControllers();
 app.Run();
 ```
 
+---
+
 ## A solução: classes especialistas + métodos de extensão bem nomeados
 
 A armadilha comum é simplesmente mover a bagunça para outro lugar, criando métodos de extensão gigantescos com várias responsabilidades. Isso só muda o problema de lugar. A verdadeira solução está em aplicar o princípio da responsabilidade única também na organização das extensões.
@@ -63,6 +68,8 @@ Cada contexto da aplicação deve ter sua própria **classe especialista de exte
 - `IdentityConfiguration`
 - `DependencyInjectionConfiguration`
 - `LoggingConfiguration`
+
+---
 
 ## Exemplo completo e organizado de extensão
 
@@ -145,6 +152,7 @@ app.MapControllers();
 app.Run();
 ```
 
+---
 
 ## Organização de arquivos e boas práticas
 
@@ -153,11 +161,15 @@ app.Run();
 - Use pastas com nomes claros: `Extensions` / `Configurations` / etc.
 - Cada método deve ter uma responsabilidade única
 
+---
+
 ## Veja na prática
 
 Quer ver como tudo isso fica implementado de verdade?
 
 Nosso projeto case, o Equinox Project, traz uma implementação completa e real de configuração da program.cs com total abstração de cada responsabilidade.
+
+---
 
 ## Conclusão
 
