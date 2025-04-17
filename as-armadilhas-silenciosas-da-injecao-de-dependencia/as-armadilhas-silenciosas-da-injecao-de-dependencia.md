@@ -32,7 +32,7 @@ O `IServiceCollection` permite registrar dependências com três tipos principai
       <td>DbContext, serviço de usuário</td>
     </tr>
     <tr>
-      <td>Singleton</td>
+      <td>Singletones</td>
       <td>Uma única vez para toda a app</td>
       <td>Configuração, cache, logging</td>
     </tr>
