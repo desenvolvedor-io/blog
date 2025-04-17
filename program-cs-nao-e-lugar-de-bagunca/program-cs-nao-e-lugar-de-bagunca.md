@@ -74,7 +74,7 @@ namespace MyProject.API.Configuration
     public static class CorsConfiguration
     {
         // Configuração do Builder
-        public static WebApplicationBuilder AddCustomCors(this WebApplicationBuilder builder)
+        public static WebApplicationBuilder AddCorsConfiguration(this WebApplicationBuilder builder)
         {
             builder.AddCors(options =>
             {
@@ -85,7 +85,7 @@ namespace MyProject.API.Configuration
         }
         
         // Configuração da aplicação (Middlewares)
-        public static WebApplication UseCustomCors(this WebApplication app)
+        public static WebApplication UseCorsConfiguration(this WebApplication app)
         {
             return app.UseCors("AllowAll");
         }
@@ -101,14 +101,14 @@ namespace MyProject.API.Configuration
     public static class SwaggerConfiguration
     {
         // Configuração do Builder
-        public static WebApplicationBuilder AddSwaggerDocumentation(this WebApplicationBuilder builder)
+        public static WebApplicationBuilder AddSwaggerConfiguration(this WebApplicationBuilder builder)
         {
             builder.AddSwaggerGen();
             return builder;
         }
         
         // Configuração da aplicação (Middlewares)
-        public static WebApplication UseSwaggerDocumentation(this WebApplication app)
+        public static WebApplication UseSwaggerConfiguration(this WebApplication app)
         {
             app.UseSwagger();
             app.UseSwaggerUI(c =>
@@ -126,20 +126,20 @@ namespace MyProject.API.Configuration
 ```csharp
 var builder = WebApplication.CreateBuilder(args);
 
-builder.AddControllers()             // Configuração geral
-       .AddCustomCors()              // Configuração CORS
-       .AddSwaggerDocumentation()    // Configuração Swagger
-       .AddIdentityConfig()          // Configuração Identity
-       .AddDependencyInjection();    // Configuração Serviços Injetados via DI
+builder.AddControllers()                          // Configuração geral
+       .AddCorsConfiguration()                    // Configuração CORS
+       .AddSwaggerConfiguration()                 // Configuração Swagger
+       .AddIdentityConfiguration()                // Configuração Identity
+       .AddDependencyInjectionConfiguration();    // Configuração Serviços Injetados via DI
 
 var app = builder.Build();
 
-app.UseCustomCors();                 // Configuração Middleware CORS
+app.UseCorsConfiguration();                       // Configuração Middleware CORS
 
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.UseSwaggerDocumentation();       // Configuração Middleware Swagger
+app.UseSwaggerConfiguration();                    // Configuração Middleware Swagger
 
 app.MapControllers();
 app.Run();
