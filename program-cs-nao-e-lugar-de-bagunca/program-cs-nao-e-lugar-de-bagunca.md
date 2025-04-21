@@ -167,7 +167,7 @@ app.Run();
 
 Quer ver como tudo isso fica implementado de verdade?
 
-Nosso projeto case, o Equinox Project, traz uma implementação completa e real de configuração da program.cs com total abstração de cada responsabilidade.
+Nosso projeto case, o [Equinox Project](https://github.com/EduardoPires/EquinoxProject/), traz uma implementação completa e real de configuração da program.cs com total abstração de cada responsabilidade.
 
 ---
 
