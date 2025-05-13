@@ -47,15 +47,52 @@ A boa notícia? O .NET tem uma solução oficial, estável, elegante e **extens
 
 Esses dois conceitos são frequentemente confundidos, mas possuem distinções claras:
 
-| Aspecto | `IHostedService` | `BackgroundService` |
-| --- | --- | --- |
-| Interface base | Sim | Sim, por herança |
-| Classe abstrata | Não | Sim (`BackgroundService`) |
-| Abstração do loop | Manual (precisa iniciar a `Task`) | Pronta (`ExecuteAsync`) |
-| Complexidade | Maior controle, mais verboso | Abstração simplificada |
-| Tratamento do ciclo de vida | Você precisa lidar com start, stop e dispose | Encapsulado |
-| Cancelamento | Você cria e gerencia o CancellationTokenSource | Fornecido automaticamente |
-| Recomendação de uso | Ideal para orquestrações, múltiplas tarefas, timers customizados, controle fino | Ideal para loops contínuos com lógica única, filas |
+<table style="border-collapse: collapse; width: 100%;">
+  <thead>
+    <tr style="background-color: #222; color: #fff;">
+      <th style="border: 1px solid #444; padding: 6px;">Aspecto</th>
+      <th style="border: 1px solid #444; padding: 6px;">IHostedService</th>
+      <th style="border: 1px solid #444; padding: 6px;">BackgroundService</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background-color: #111; color: #eee;">
+      <td style="border: 1px solid #444; padding: 6px;">Interface base</td>
+      <td style="border: 1px solid #444; padding: 6px;">Sim</td>
+      <td style="border: 1px solid #444; padding: 6px;">Sim, por herança</td>
+    </tr>
+    <tr style="background-color: #111; color: #eee;">
+      <td style="border: 1px solid #444; padding: 6px;">Classe abstrata</td>
+      <td style="border: 1px solid #444; padding: 6px;">Não</td>
+      <td style="border: 1px solid #444; padding: 6px;">Sim (<code>BackgroundService</code>)</td>
+    </tr>
+    <tr style="background-color: #111; color: #eee;">
+      <td style="border: 1px solid #444; padding: 6px;">Abstração do loop</td>
+      <td style="border: 1px solid #444; padding: 6px;">Manual (precisa iniciar a <code>Task</code>)</td>
+      <td style="border: 1px solid #444; padding: 6px;">Pronta (<code>ExecuteAsync</code>)</td>
+    </tr>
+    <tr style="background-color: #111; color: #eee;">
+      <td style="border: 1px solid #444; padding: 6px;">Complexidade</td>
+      <td style="border: 1px solid #444; padding: 6px;">Maior controle, mais verboso</td>
+      <td style="border: 1px solid #444; padding: 6px;">Abstração simplificada</td>
+    </tr>
+    <tr style="background-color: #111; color: #eee;">
+      <td style="border: 1px solid #444; padding: 6px;">Tratamento do ciclo de vida</td>
+      <td style="border: 1px solid #444; padding: 6px;">Você precisa lidar com start, stop e dispose</td>
+      <td style="border: 1px solid #444; padding: 6px;">Encapsulado</td>
+    </tr>
+    <tr style="background-color: #111; color: #eee;">
+      <td style="border: 1px solid #444; padding: 6px;">Cancelamento</td>
+      <td style="border: 1px solid #444; padding: 6px;">Você cria e gerencia o <code>CancellationTokenSource</code></td>
+      <td style="border: 1px solid #444; padding: 6px;">Fornecido automaticamente</td>
+    </tr>
+    <tr style="background-color: #111; color: #eee;">
+      <td style="border: 1px solid #444; padding: 6px;">Recomendação de uso</td>
+      <td style="border: 1px solid #444; padding: 6px;">Ideal para orquestrações, múltiplas tarefas, timers customizados, controle fino</td>
+      <td style="border: 1px solid #444; padding: 6px;">Ideal para loops contínuos com lógica única, filas</td>
+    </tr>
+  </tbody>
+</table>
 
 **O `BackgroundService` é, na prática, uma implementação de `IHostedService` com estrutura pré-definida.**
 
