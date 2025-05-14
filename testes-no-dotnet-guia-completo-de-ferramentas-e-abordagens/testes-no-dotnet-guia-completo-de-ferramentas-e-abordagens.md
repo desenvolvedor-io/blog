@@ -182,8 +182,8 @@ public class PedidoTests : IClassFixture<CustomWebApplicationFactory<Program>> {
 - [**Selenium**](https://www.selenium.dev/)
     
     Um dos frameworks de automação de browser mais antigos e populares. Ótimo suporte a múltiplas linguagens e navegadores. Mais verboso, mas muito compatível com sistemas legados.
-    
-- [**SpecFlow**](https://specflow.org/)
+
+- [**Reqnroll](https://www.nuget.org/packages/Reqnroll)** (sucessor do SpecFlow)
     
     Framework BDD (Behavior-Driven Development) que permite escrever testes em linguagem natural (Gherkin). Facilita a colaboração entre devs, QAs e negócio.
     
