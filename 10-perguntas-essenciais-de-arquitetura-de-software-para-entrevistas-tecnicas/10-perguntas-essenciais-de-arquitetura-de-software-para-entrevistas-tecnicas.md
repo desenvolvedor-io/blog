@@ -274,14 +274,17 @@ Querem ver se você aplica **engenharia preventiva**.
 
 ### Conceito por trás
 
-- Testes de carga e stress antecipam problemas.
-- Observabilidade permite medir comportamento sob pressão.
+- **Análise assintótica** e revisão de código ajudam a prever gargalos antes mesmo de medir.
+- **Observabilidade e profiling** permitem identificar tempo de resposta e uso de recursos nos pontos críticos.
+- **Testes de carga e stress** em cenários realistas expõem limites e comportamentos sob alta demanda.
+- **Monitoramento contínuo em produção** garante ação preventiva ao detectar tendências negativas.
 
 ### Como raciocinar
 
-1. Simule uso realista em staging.
-2. Colete métricas e identifique pontos críticos.
-3. Otimize antes do go-live.
+1. **Avalie o código** para identificar complexidade e possíveis gargalos (I/O, CPU, rede).
+2. **Meça pontos críticos** com ferramentas de observabilidade e profiling.
+3. **Simule uso realista** em staging com testes de carga e stress.
+4. **Monitore em produção** para agir preventivamente antes que o problema se torne crítico.
 
 ### Resposta modelo
 
