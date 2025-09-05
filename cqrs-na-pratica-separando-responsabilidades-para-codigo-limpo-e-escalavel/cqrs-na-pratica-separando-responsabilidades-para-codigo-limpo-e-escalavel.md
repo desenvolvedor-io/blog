@@ -191,7 +191,7 @@ public class DesativarFuncionarioHandler
 
 ---
 
-## 6.4 Query: projeção direta e sem tracking
+## Query: projeção direta e sem tracking
 
 ```csharp
 public record ProdutoDto(int Id, string Nome, decimal Preco, bool Ativo, byte[] VersaoLinha);
