@@ -30,7 +30,7 @@ O .NET 9 introduziu um novo jeito de gerar GUIDs: `Guid.CreateVersion7()`, adere
 Embora o .NET não exponha todos os detalhes de como os bytes são organizados ao nível de aplicação, podemos entender qualitativamente:
 
 - Os bits iniciais carregam o tempo (alto, médio, baixo) — “time_high”, “time_mid”, “time_low” — de forma que UUIDs gerados em tempos posteriores resultem (na maioria dos casos) em GUIDs com valor binário/textual “maior”. Isso permite ordenação cronológica intrínseca.
-- Em seguida vem a parte “versão” (identificando v7), e em seguida bits de aleatoriedade. [Wikipedia+2Microsoft Learn+2](https://en.wikipedia.org/wiki/Universally_unique_identifier?utm_source=chatgpt.com)
+- Em seguida vem a parte “versão” (identificando v7), e em seguida bits de aleatoriedade.
 
 ### Importante
 
