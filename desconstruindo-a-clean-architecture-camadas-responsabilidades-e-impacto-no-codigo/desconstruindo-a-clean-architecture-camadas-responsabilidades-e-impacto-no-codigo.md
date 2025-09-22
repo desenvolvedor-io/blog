@@ -8,6 +8,8 @@ Neste artigo, vamos **destrinchar esse conceito**, entender seus blocos principa
 
 ---
 
+<img width="614" height="516" alt="image" src="https://raw.githubusercontent.com/desenvolvedor-io/blog/refs/heads/main/desconstruindo-a-clean-architecture-camadas-responsabilidades-e-impacto-no-codigo/clean-architecture.png" />
+
 ## O Conceito de Clean Architecture
 
 A Clean Architecture organiza o software em **camadas independentes**, cada uma com responsabilidades bem definidas. O núcleo do sistema (regras de negócio) deve permanecer isolado de detalhes externos, como bancos de dados, frameworks ou interfaces gráficas.
@@ -27,7 +29,7 @@ Com isso, ganhamos:
 
 ## As Camadas da Clean Architecture
 
-### **🔵 Domain Layer – O Coração do Sistema**
+### **🟡 Domain Layer – O Coração do Sistema**
 
 O **Domínio** é a camada mais importante da Clean Architecture, porque é aqui que moram as **regras de negócio puras**, aquelas que dão identidade ao sistema e que não podem depender de nada externo (frameworks, banco de dados, APIs, etc).
 
@@ -70,7 +72,7 @@ O caso de uso `ConfirmarPedidoHandler` recebe um comando, busca o `Pedido` via r
 
 ---
 
-### 🟡 **Infrastructure Layer – Os Detalhes da Vida Real**
+### 🔵 **Infrastructure Layer – Os Detalhes da Vida Real**
 
 A **Infraestrutura** é onde o software deixa de ser só modelo mental e passa a encarar o mundo real.
 
